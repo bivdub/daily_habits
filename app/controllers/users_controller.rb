@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_action :is_authenticated?
+
   def index
     @users = User.new
   end

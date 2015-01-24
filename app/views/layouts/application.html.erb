@@ -2,16 +2,17 @@
 <html>
 <head>
   <title>The Daily Habit</title>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <<link href='http://fonts.googleapis.com/css?family=Stint+Ultra+Condensed|Pontano+Sans' rel='stylesheet' type='text/css'>
-  <link href="https
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <link href='http://fonts.googleapis.com/css?family=Stint+Ultra+Condensed|Pontano+Sans' rel='stylesheet' type='text/css'>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
   <body>
     <div class="container">
+    <%= render "layouts/flash" %>
       <h1>TESTING PULL REQUESTS!!!!! THANKS FOR BEING OUT GIT MASTER BRIAN!</h1>
 
         <%= yield %>

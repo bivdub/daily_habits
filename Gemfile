@@ -28,7 +28,7 @@ gem 'twilio-ruby'
 gem 'highcharts-rails'
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem 'bootstrap-form'
+gem 'bootstrap_form'
 gem 'sendgrid'
 
 # Use ActiveModel has_secure_password

@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   #   get 'products/:id' => 'catalog#view'
 
   root "site#index"
-  get "login" => "session#new"
+
+  get "login" => "sessions#new"
   get "about" => "site#about"
 
   resources :users

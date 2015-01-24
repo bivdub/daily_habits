@@ -1,0 +1,12 @@
+<!-- login form include facebook auth login / bootstrap form for login, redirect to profile -->
+<div class="container">
+<h1>Sessions#new</h1>
+
+<%= bootstrap_form_for :user do |f| %>
+  <%= f.text_field :email, placeholder: "Enter your email", icon: "user" %>
+  <%= f.password_field :password, placeholder: "Enter your password", icon: "lock" %>
+  <%= f.submit "Login", :class=> "btn btn-primary" %>
+
+<% end %>
+
+</div>
