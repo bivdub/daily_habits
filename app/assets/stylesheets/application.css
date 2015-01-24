@@ -13,3 +13,60 @@
  *= require_tree .
  *= require_self
  */
+
+/*SITE BACKGROUND FOR MVP: #232425
+ALL NON-HEADER TEXT COLOR FOR MVP: #ffffff
+
+Additional color palette options for now:
+deep pink: #620032
+navy: #072759
+golden: #EC9A0A
+green: #4F7D00
+
+don't worry - these are going to be laid out over gradients and translucent
+containers so they won't look shitty
+
+data visualization color palette:
+
+fuchsia: #940A50
+bright green: #8DDA09
+gold: #FFAE20
+sky blue: #2358AD
+
+site color palette:
+
+
+fonts:
+font-family: 'Stint Ultra Condensed', cursive;
+font-family: 'Pontano Sans', sans-serif;*/
+
+h1 {
+  font-family: 'Stint Ultra Condensed', cursive;
+  color: #EC9A0A;
+  font-size: 36px;
+}
+
+h2 {
+  font-family: 'Pontano Sans', sans-serif;
+  color: #ffffff;
+  font-size: 22px;
+}
+
+h3 {
+  font-family: 'Pontano Sans', sans-serif;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+h4 {
+  font-family: 'Pontano Sans', sans-serif;
+  color: #ffffff;
+  font-size: 12px;
+}
+
+h5 {
+  font-family: 'Pontano Sans', sans-serif;
+  color: #ffffff;
+  font-size: 8px;
+}
+
