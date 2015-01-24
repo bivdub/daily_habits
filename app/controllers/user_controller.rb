@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-
+    redirect_to user_path
   end
 
   def update
@@ -26,6 +26,13 @@ class UsersController < ApplicationController
 
   def destroy
   end
+
+  def goals
+  end
+
+  def goals_update
+  end
+
 
   private
   def user_params
