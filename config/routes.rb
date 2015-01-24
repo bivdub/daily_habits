@@ -11,9 +11,16 @@ Rails.application.routes.draw do
   root "site#index"
 
   get "login" => "sessions#new"
+  post "login" => "sessions#create"
+
+  get "logout" => "sessions#destroy"
+  post "logout" => "sessions#destroy"
+
   get "about" => "site#about"
 
   resources :users
+  get 'signup' => 'users#new', as: :signup
+
 
   get "users/:id/goals" => "users#goals"
   post "users/:id/goals" => "users#goals_update"

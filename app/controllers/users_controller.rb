@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :is_authenticated?
+  # before_action :is_authenticated?
 
   def index
     @users = User.new
@@ -58,7 +58,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name,:email,:password)
+    params.require(:user).permit(:name,:email,:password, :password_confirmation)
   end
 
 end
