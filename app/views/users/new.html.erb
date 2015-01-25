@@ -1,0 +1,12 @@
+<!-- sign up includes facebook, bootstrap form, redirects user profile -->
+
+<div class="container">
+
+<%= bootstrap_form_for @user do |f| %>
+  <%= f.text_field :name, placeholder: "Enter your name", icon: "user" %>
+  <%= f.text_field :email, placeholder: "Enter your email", icon: "envelope" %>
+  <%= f.password_field :password, placeholder: "Enter your password", icon: "lock" %>
+  <%= f.password_field :password_confirmation, label: "Confirm Password", icon: "lock" %>
+  <%= f.submit "Sign Up!", :class=> "btn btn-primary" %>
+
+<% end %>

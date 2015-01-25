@@ -1,0 +1,17 @@
+<!-- users profile page links to everything, importantly edit user and edit goals, button to update usersgoals lists usersgoals some sort of chart ; posts to usersgoals -->
+
+  <h1>Hi <%= @user.name %></h1>
+
+  <!-- include partials?? -->
+
+  <!-- include badges, progress bar and high chart stats -->
+
+ <h2>Today's Goals</h2>
+
+  <!-- List out the goals, collection boxes, maybe change to radio buttons later-->
+  <% @user.goals.each do |goal| %>
+      <%= f.collection_check_boxes :goal_ids, @goals, :id, :name %>
+  <% end %>
+
+
+
