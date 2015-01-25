@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :users
   get 'signup' => 'users#new', as: :signup
 
+  get '/auth/:provider/callback', to: 'sessions#create'
 
   get "users/:id/goals" => "users#goals"
   post "users/:id/goals" => "users#goals_update"
