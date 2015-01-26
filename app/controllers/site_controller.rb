@@ -9,8 +9,6 @@ class SiteController < ApplicationController
 
   def new
     @user = User.new
-    @user.save
-    redirect_to new_user_path
   end
 
   def create
