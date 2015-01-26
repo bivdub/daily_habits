@@ -5,14 +5,14 @@ class User < ActiveRecord::Base
   has_many :goals, through: :goals_users
   has_and_belongs_to_many :awards
 
-  before_create do
-    initialize_user
-  end
+  # before_create do
+  #   initialize_user
+  # end
 
-  before_validation do
-    self.phone = phone.gsub(/[^0-9]/, "") if attribute_present?("phone")
-    self.zipcode = zipcode.gsub(/[^0-9]/, "") if attribute_present?("zipcode")
-  end
+  # before_validation do
+  #   self.phone = phone.gsub(/[^0-9]/, "") if attribute_present?("phone")
+  #   self.zipcode = zipcode.gsub(/[^0-9]/, "") if attribute_present?("zipcode")
+  # end
 
   validates :name, presence: true, uniqueness: {case_sensitive: false}
 

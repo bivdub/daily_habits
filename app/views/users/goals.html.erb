@@ -5,8 +5,41 @@
 
 <% if @goals_user.any? %>
     <% @goals_user.each do |goal| %>
-        <%= goal_user.user.name %>
+        <%= goal.name %>
     <% end %>
 <% else %>
     <p>No Goals</p>
 <% end %>
+
+<!--
+1) ajax delete (make goals inactive) button (within table row)
+2) form for custom create and make that ajax so it appears in the list of goals
+3) goals add drop down with hardcoded goals (ability to select dropdown and add them to goals list)
+5) counting the goals as you select prepopulated goals
+-->
+
+
+<%= bootstrap_form_for @goal, url: "users/#{@user.id}/goals" do |f| %>
+  <%= f.text_field :name, placeholder: "Enter your custom goal" %>
+  <%= f.submit "Submit", class: "btn btn-primary" %>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

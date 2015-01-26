@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
 
   # before_action :is_authenticated?
+  before_action do
+    @user = current_user
+  end
+
 
   def index
     redirect_to show
@@ -8,11 +12,13 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+
   end
 
   def show
-    @current_user
-    @goals_user = User.goals(goal_params)
+    @user = current_user
+    # @goals_user = User.goals(goal_params)
+    @goals_user = GoalsUser.where(user_id: @user.id)  # join table for goals and users
   end
 
   def create
@@ -23,7 +29,7 @@ class UsersController < ApplicationController
       redirect_to signup_path
     else
       flash[:success] = 'User has been created'
-      redirect_to user_path
+      redirect_to login_path
     end
   end
 
@@ -36,9 +42,6 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find_by_id(params[:id])
-
-    @user.goals.clear
-    @goals = params[:user][:goal_id]
 
     @goals.each do |goal_id|
       @user.goals << Goal.find(goal_id) unless goal_id.blank?
@@ -55,18 +58,20 @@ class UsersController < ApplicationController
   end
 
   def goals
-    @goals = User.goals
-    @goal_user = Goal.find_by_id(params[:id])
-    @users = goal ? goal.users : []
+    @goal = Goal.new
+    @goals_user = GoalsUser.where(user_id: @user.id)
   end
 
   def goalshow
     @goal = User.goal
   end
 
+  def goals_add
+    @goal = Goal.create(goal_params)
+  end
+
 
   def goals_update
-
   end
 
   def awards
@@ -80,7 +85,9 @@ class UsersController < ApplicationController
   end
 
   def goal_params
-    params_require[:goal_user].permit(:streak_completed, :streak_failed, :completed_today, :max_streak, :max_failed, :active)
+    params_require[:goal].permit(:name)
+        # params_require[:goal].permit(:streak_completed, :streak_failed, :completed_today, :max_streak, :max_failed, :active)
+
   end
 
 end
