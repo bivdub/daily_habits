@@ -1,17 +1,44 @@
 <!-- users profile page links to everything, importantly edit user and edit goals, button to update usersgoals lists usersgoals some sort of chart ; posts to usersgoals -->
 
-  <h1>Hi <%= @user.name %></h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <img src="http://i.imgur.com/aYEXWnA.png">
+    </div>
+    <div class="col-md-9 postbox">
+      <h1><%= @user.name %></h1>
+
+      <br>
+      <% if (@user.goals = 0) { %>
+      <h3>You have not set any habits yet!</h3>
+      <% } else { %>
+      <div>
+        <h3><strong><%= @user.name %>'s Goals for Today:</h3></strong>
+
+      <% @user.goals.each do |goal| %>
+        <div>
+
+          <ul>
+            <table class="post table-striped">
+              <li> <%= f.collection_check_boxes :goal_ids, @goals, :id, :name %></li>
+              <br>
+
+            </table>
+          </ul>
+        </div>
+         <% end %>
+      </div>
+       <% end %>
+    </div>
+  </div>
+</div>
+
 
   <!-- include partials?? -->
 
   <!-- include badges, progress bar and high chart stats -->
 
- <h2>Today's Goals</h2>
-
   <!-- List out the goals, collection boxes, maybe change to radio buttons later-->
-  <% @user.goals.each do |goal| %>
-      <%= f.collection_check_boxes :goal_ids, @goals, :id, :name %>
-  <% end %>
 
 
 
