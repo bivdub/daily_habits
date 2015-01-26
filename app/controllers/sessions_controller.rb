@@ -4,8 +4,8 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_or_create_from_auth_hash(auth_hash) || User.authenticate(params[:user][:email], params[:user][:password])
-
+    @user = User.authenticate(params[:user][:email], params[:user][:password])
+# FOR AUTH - User.find_or_create_from_auth_hash(auth_hash) ||
     if @user
       session[:user_id] = @user.id
       flash[:success] = "Login Successful!"
