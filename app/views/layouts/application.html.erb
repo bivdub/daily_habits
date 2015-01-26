@@ -12,13 +12,15 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <link href='http://fonts.googleapis.com/css?family=Stint+Ultra+Condensed|Pontano+Sans' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
   <body>
-<div class="container">
+
+
 <a href='/'><div class="page-header text-center">
   <h1>The Daily Habit <br>
   <small>Do your day a different way.</small></h1>
@@ -26,7 +28,7 @@
 
 <% if @current_user %>
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse" role="banner">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -50,17 +52,21 @@
 
 <%= yield %>
 
-<div class="container">
-  <div class="footer">
-  </div>
-</div>
-</div>
+    <footer id="footer" class="midnight-blue">
+        <div class="container">
+            <div class="row text-center">
+
+                    <h2><a href="/about">About the Developers</a></h2>
+
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
 
 <% else %>
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse" role="banner">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -76,19 +82,22 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/login"><h2>Login</h2><span class="sr-only">(current)</span></a></li>
         <li><a href="/signup"><h2>Signup</h2><span class="sr-only">(current)</span></a></li>
-              </ul>
+      </ul>
     </div>
   </div>
 </nav>
 
 <%= yield %>
 
-<div class="container">
-  <div class="footer text-center">
-      <a href="/about"><h2>About The Daily Habit</h2><span class="sr-only"></span></a>
-  </div>
-</div>
-</div>
+    <footer id="footer" class="midnight-blue">
+        <div class="container">
+            <div class="row text-center">
+
+                    <h2><a href="/about">About the Developers</a></h2>
+
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
 
