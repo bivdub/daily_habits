@@ -30,6 +30,8 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'bootstrap_form'
 gem 'sendgrid'
+gem 'validates_zipcode'
+
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
