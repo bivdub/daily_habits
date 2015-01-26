@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 
   def new
+    redirect_to users_path
   end
 
   def create
@@ -14,7 +15,6 @@ class SessionsController < ApplicationController
       flash[:danger] = "Credentials Invalid!"
       render :new
     end
-
   end
 
   def destroy

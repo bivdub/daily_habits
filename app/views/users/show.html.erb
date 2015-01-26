@@ -1,17 +1,21 @@
 <!-- users profile page links to everything, importantly edit user and edit goals, button to update usersgoals lists usersgoals some sort of chart ; posts to usersgoals -->
 
-  <h1>Hi <%= @user.name %></h1>
+ <h1>Hi <%= @user.name %></h1>
 
   <!-- include partials?? -->
 
-  <!-- include badges, progress bar and high chart stats -->
+  <!-- include badges, progress bar and chart stats -->
 
- <h2>Today's Goals</h2>
+  <%= link to "Edit", , edit_user_path(@user) %>
 
-  <!-- List out the goals, collection boxes, maybe change to radio buttons later-->
-  <% @user.goals.each do |goal| %>
-      <%= f.collection_check_boxes :goal_ids, @goals, :id, :name %>
+  <% @goals_user.each do |goal| %>
+    <tr>
+      <td><%= link_to goal.name, users_goalshow_path(goal.name) %></td>
+      <td><%= link_to "<button type='button' class='btn btn-primary'>Delete</button>".html_safe, goal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
   <% end %>
+
+  <%= link to "Update Goals", user_id_goals_path(@user) %>
 
 
 

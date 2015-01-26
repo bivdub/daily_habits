@@ -2,25 +2,22 @@ class UsersController < ApplicationController
 
   # before_action :is_authenticated?
 
-  def index
-    @users = User.new
+  def show
+    @current_user
+    @goals_user = User.goals(goal_params)
   end
 
   def create
-    @user = User.new(user_params)
-    @user.save
+    @user = User.create(user_params)
 
     if @user.errors.any?
       render 'new'
     else
       flash[:success] = 'User has been created'
-      redirect_to login_path
+      redirect_to user_path
     end
   end
 
-  def new
-    @user = User.new
-  end
 
   def edit
     @user = User.find_by_id(params[:id])
@@ -42,14 +39,25 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @goal = Goal.find(params[:id])
+    @goal.destroy
+
+    redirect_to user_path
   end
 
-  def goal
-    @goal = Goal.find_by_id(params[:id])
+  def goals
+    @goals = User.goals
+    @goal_user = Goal.find_by_id(params[:id])
     @users = goal ? goal.users : []
   end
 
+  def goalshow
+    @goal = User.goal
+  end
+
+
   def goals_update
+
   end
 
   def awards
@@ -60,6 +68,10 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name,:email,:password, :password_confirmation)
+  end
+
+  def goal_params
+    params_require[:goal_user].permit(:streak_completed, :streak_failed, :completed_today, :max_streak, :max_failed, :active)
   end
 
 end

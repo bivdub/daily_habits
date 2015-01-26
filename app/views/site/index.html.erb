@@ -1,3 +1,44 @@
-<!-- what the app is / how to use it / directs to signup -->
+<!-- what the app is / how to use it / directs to signup site#index-->
 
-<h1>site#index</h1>
+<div class="welcome_page">
+
+   <%= render 'layouts/flash' %>
+
+  <h1>Welcome to The Daily Habit</h1>
+
+  <p>The Daily Habit is your daily goal setting tool. Set your goals of the day and we'll help you keep track of them. And we'll help you to achieve them.</p>
+
+  <p>Already a member? Login:</p>
+  <div class="row">
+    <div class="col-md-4">
+      <%= bootstrap_form_for :user do |f| %>
+        <%= f.text_field :email, placeholder: "Enter your email", icon: "envelope" %>
+        <%= f.password_field :password, placeholder: "Enter your password", icon: "lock" %>
+        <%= f.submit "Log In", :class=> "btn btn-primary"%>
+      <% end %>
+    </div>
+  </div>
+
+  <br>
+  <p>Interested in forming those habits, but don't have an account yet? Sign up below:</p>
+
+  <div class="row">
+      <div class="col-md-4">
+       <%= bootstrap_form_for :user do |f| %>
+          <%= f.text_field :name, placeholder: "Enter your name", icon: "user" %>
+          <%= f.text_field :email, placeholder: "Enter your email", icon: "envelope" %>
+          <%= f.password_field :password, placeholder: "Enter your password", icon: "lock" %>
+          <%= f.password_field :password_confirmation, placeholder: "Confirm Your Password", icon: "lock" %>
+        <%= f.submit "Sign Up!", :class=> "btn btn-primary" %>
+      <% end %>
+      </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
