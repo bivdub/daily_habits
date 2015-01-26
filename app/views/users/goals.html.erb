@@ -1,1 +1,12 @@
 <!-- users goals update / create page also posts to goals DB in event of new user inputted goal ; notifications opt in, posts to user DB ; notifications opt in goes to User DB, new goals go to goals DB & goalsusers DB, add new goal that already exists goes to goalsusers db -->
+
+
+<h3>Goals</h3>
+
+<% if @goals_user.any? %>
+    <% @goals_user.each do |goal| %>
+        <%= goal_user.user.name %>
+    <% end %>
+<% else %>
+    <p>No Goals</p>
+<% end %>
