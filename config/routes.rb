@@ -18,10 +18,10 @@ Rails.application.routes.draw do
 
   get "about" => "site#about"
 
-  resources :users
+  get 'signup' => 'users#new', as: :signup
+  post 'signup' => 'users#create'
 
-  get 'signup' => 'site#new', as: :signup
-  post 'signup' => 'site#create'
+  resources :users
 
   get '/auth/:provider/callback', to: 'sessions#create'
 

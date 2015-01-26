@@ -7,20 +7,20 @@ class SiteController < ApplicationController
     end
   end
 
-  def new
-    @user = User.new
-  end
+  # def new
+  #   @user = User.new
+  # end
 
-  def create
-    @user = User.create(user_params)
-    if @user
-      session[:user_id] = @user.id
-      redirect_to user_path, flash[:success] = "Login Successful!"
-    else
-      flash[:danger] = "Unable to Sign Up!"
-      render :new
-    end
-  end
+  # def create
+  #   @user = User.create(user_params)
+  #   if @user
+  #     session[:user_id] = @user.id
+  #     redirect_to user_path, flash[:success] = "Login Successful!"
+  #   else
+  #     flash[:danger] = "Unable to Sign Up!"
+  #     render :new
+  #   end
+  # end
 
   def about
   end

@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
 
   def initialize_user
     self.text_alert = false
-    self.phone_alert = false
+    self.email_alert = false
     self.negative = false
     self.positive = false
   end

@@ -2,7 +2,12 @@ class UsersController < ApplicationController
 
   # before_action :is_authenticated?
 
+  def index
+    redirect_to show
+  end
+
   def new
+    @user = User.new
   end
 
   def show
@@ -14,7 +19,8 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
 
     if @user.errors.any?
-      render 'new'
+      flash[:danger] = 'Error from controller'
+      redirect_to signup_path
     else
       flash[:success] = 'User has been created'
       redirect_to user_path
