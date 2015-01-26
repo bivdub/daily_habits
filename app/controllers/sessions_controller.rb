@@ -14,7 +14,6 @@ class SessionsController < ApplicationController
       flash[:danger] = "Credentials Invalid!"
       render :new
     end
-
   end
 
   def destroy

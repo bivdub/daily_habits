@@ -46,3 +46,19 @@ new Morris.Line({
     </div>
   </body>
 </html>
+
+
+
+
+  <%= link to "Edit", , edit_user_path(@user) %>
+
+  <% @goals_user.each do |goal| %>
+    <tr>
+      <td><%= link_to goal.name, users_goalshow_path(goal.name) %></td>
+      <td><%= link_to "<button type='button' class='btn btn-primary'>Delete</button>".html_safe, goal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  <!-- List out the goals, collection boxes, maybe change to radio buttons later-->
+
+  <%= link to "Update Goals", user_id_goals_path(@user) %>
+
