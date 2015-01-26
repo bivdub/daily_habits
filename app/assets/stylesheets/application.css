@@ -40,9 +40,13 @@ fonts:
 font-family: 'Stint Ultra Condensed', cursive;
 font-family: 'Pontano Sans', sans-serif;*/
 
+body {
+  background-color: #fff;
+}
+
 h1 {
   font-family: 'Stint Ultra Condensed', cursive;
-  color: #EC9A0A;
+  color: #8DDA09;
   font-size: 36px;
 }
 
@@ -68,5 +72,41 @@ h5 {
   font-family: 'Pontano Sans', sans-serif;
   color: #ffffff;
   font-size: 8px;
+}
+
+.navbar {
+  background: #620032;
+  border-style: none;
+}
+
+.btn-primary:hover {
+  background-color: black;
+  border-style: none;
+}
+
+.btn-primary {
+  background-color: #620032;
+  border-style: none;
+}
+
+.page-header{
+  padding-top: 3px;
+  padding-left: 4%;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  background: #232425;
+}
+
+/*.navbar-default .navbar-nav>li>a {
+  color: #232425;
+}*/
+
+a:link {
+  color: #96281B;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #96281B;
 }
 

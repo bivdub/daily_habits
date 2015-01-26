@@ -18,44 +18,78 @@
   <%= csrf_meta_tags %>
 </head>
   <body>
-    <div class="container">
-    <%= render "layouts/flash" %>
-      <h1>TESTING PULL REQUESTS!!!!! THANKS FOR BEING OUT GIT MASTER BRIAN!</h1>
+<div class="container">
+<a href='/'><div class="page-header text-center">
+  <h1>The Daily Habit <br>
+  <small>Do your day a different way.</small></h1>
+</div></a>
 
-      <div id="myfirstchart" style="height: 250px;"></div>
+<% if @current_user %>
 
-<script>
-
-new Morris.Line({
-  // ID of the element in which to draw the chart.
-  element: 'myfirstchart',
-
-  // Chart data records -- each entry in this array corresponds to a point on
-  // the chart.
-  data: [
-    { year: '2008', value: 20 },
-    { year: '2009', value: 10 },
-    { year: '2010', value: 5 },
-    { year: '2011', value: 5 },
-    { year: '2012', value: 20 }
-  ],
-
-  // The name of the data record attribute that contains x-values.
-  xkey: 'year',
-
-  // A list of names of data record attributes that contain y-values.
-  ykeys: ['value'],
-
-  // Labels for the ykeys -- will be displayed when you hover over the
-  // chart.
-
-  labels: ['Value']
-});
-
-</script>
-
-        <%= yield %>
-
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><img src="http://i.imgur.com/tNVlyfm.png"></a>
     </div>
-  </body>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href='/users/<%= @current_user.id %>'><h2>My Profile</h2></a><span class="sr-only">(current)</span></li>
+        <li><a href="/users/<%= @current_user.id %>/goals"><h2>Update Goals</h2><span class="sr-only"></span></a></li>
+        <li><a href="/logout"><h2>Logout</h2><span class="sr-only"></span></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<%= yield %>
+
+<div class="container">
+  <div class="footer">
+  </div>
+</div>
+</div>
+</body>
 </html>
+
+<% else %>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><img src="http://i.imgur.com/tNVlyfm.png"></a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/login"><h2>Login</h2><span class="sr-only">(current)</span></a></li>
+        <li><a href="/signup"><h2>Signup</h2><span class="sr-only">(current)</span></a></li>
+              </ul>
+    </div>
+  </div>
+</nav>
+
+<%= yield %>
+
+<div class="container">
+  <div class="footer text-center">
+      <a href="/about"><h2>About The Daily Habit</h2><span class="sr-only"></span></a>
+  </div>
+</div>
+</div>
+</body>
+</html>
+
+<% end %>
