@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
 
   def new
-    redirect_to users_path
   end
 
   def create

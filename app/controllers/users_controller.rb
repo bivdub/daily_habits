@@ -2,6 +2,9 @@ class UsersController < ApplicationController
 
   # before_action :is_authenticated?
 
+  def new
+  end
+
   def show
     @current_user
     @goals_user = User.goals(goal_params)
