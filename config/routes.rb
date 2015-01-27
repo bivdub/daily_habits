@@ -10,7 +10,11 @@ Rails.application.routes.draw do
 
   root "site#index"
 
-  get "login" => "sessions#new"
+  get 'auth/logout' => 'auth#logout'
+  get 'auth/failure' => 'auth#failure'
+  get 'auth/:provider/callback' => 'auth#callback'
+
+  get "login" => "sessions#new", as: :login
   post "login" => "sessions#create"
 
   get "logout" => "sessions#destroy"
