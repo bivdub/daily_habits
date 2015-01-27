@@ -62,3 +62,5 @@ new Morris.Line({
 
   <%= link to "Update Goals", user_id_goals_path(@user) %>
 
+<%= debug params %>
+<%= debug @user %>
