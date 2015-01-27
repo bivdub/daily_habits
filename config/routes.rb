@@ -33,7 +33,7 @@ Rails.application.routes.draw do
 
   get "users/:id/awards" => "users#awards"
 
-  put "users/update" => "users#goals_update"
+  put "users/:id/goals/update" => "users#goals_update", as: "goal_update"
 
-
+  put "users/:id/goals/remove" => "users#goals_inactive", as: "goal_inactive"
 end

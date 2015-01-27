@@ -40,11 +40,13 @@ class UsersController < ApplicationController
     end
   end
 
+# USER SETTINGS EDIT VIEW
   def edit
     @user = User.find_by_id(params[:id])
     @goal = Goal.find_by_id(params[:goal_id])
   end
 
+# USER SETTINGS UPDATE METHOD
   def update
     @user.phone = params[:user][:phone]
     @user.save
@@ -54,12 +56,12 @@ class UsersController < ApplicationController
     redirect_to user_path(@user)
   end
 
-  def destroy
-    @goal = Goal.find(params[:id])
-    @goal.destroy
+  # def destroy
+  #   @goal = Goal.find(params[:id])
+  #   @goal.destroy
 
-    redirect_to user_path
-  end
+  #   redirect_to user_path
+  # end
 
   def goals
     @goal = Goal.new
@@ -69,10 +71,12 @@ class UsersController < ApplicationController
     @goals = Goal.all
   end
 
+# INDIVIDUAL GOAL PAGE
   def goalshow
     # @goal = GoalsUser
   end
 
+# CUSTOM GOAL ADD on GOALS UPDATE PAGE
   def goals_add
     @goal = Goal.create(goal_params)
     GoalsUser.create({user_id:@user.id,goal_id:@goal.id})
@@ -80,7 +84,23 @@ class UsersController < ApplicationController
     redirect_to user_path
   end
 
+# HARDCODE GOAL ADD on GOALS UPDATE PAGE
   def goals_update
+    @goal = Goal.find(params[:id])
+    goal = GoalsUser.find_or_create_by({user_id:@user.id,goal_id:@goal.id})
+    # goal.update_attribute("active", true)
+    redirect_to user_path
+    # render plain: goal.inspect
+  end
+
+# CUSTOM AND HARDCODE GOAL INACTIVE on GOALS UPDATE PAGE
+  def goals_inactive
+    @goal = Goal.find(params[:id])
+    @temp = GoalsUser.where({user_id:@user.id,goal_id:@goal.id})
+    @temp.update_all(active: "false")
+
+    redirect_to user_path
+    # render plain: @temp.inspect
   end
 
   def awards
