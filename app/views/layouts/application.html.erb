@@ -13,9 +13,11 @@
 <!-- <script src="/assets/javascript/goals_data.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <link href='http://fonts.googleapis.com/css?family=Stint+Ultra+Condensed|Pontano+Sans' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Stint+Ultra+Condensed|Pontano+Sans' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -28,7 +30,6 @@
   <small>Do your day a different way.</small></h1>
 </div></a>
 
-<% if @current_user %>
 
 <nav class="navbar navbar-inverse" role="banner">
   <div class="container-fluid">
@@ -44,71 +45,32 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
+
+<% if @current_user %>
         <li><a href='/users/<%= @current_user.id %>'><h2>My Profile</h2></a><span class="sr-only">(current)</span></li>
         <li><a href="/users/<%= @current_user.id %>/goals"><h2>Update Goals</h2><span class="sr-only"></span></a></li>
         <li><a href="/logout"><h2>Logout</h2><span class="sr-only"></span></a></li>
+<% else %>
+        <li><a href="/login"><h2>Login</h2><span class="sr-only">(current)</span></a></li>
+        <li><a href="/signup"><h2>Signup</h2><span class="sr-only">(current)</span></a></li>
+<% end %>
       </ul>
     </div>
   </div>
 </nav>
-
-  <%= render "partials/flash" %>
+<div class="container">
+<%= render "partials/flash" %>
 
 <%= yield %>
-
+</div>
     <footer id="footer" class="midnight-blue">
-        <div class="container">
+
             <div class="row text-center">
 
                     <h2><a href="/about">About the Developers</a></h2>
 
             </div>
-        </div>
-    </footer>
-</body>
-</html>
-
-<% else %>
-
-<nav class="navbar navbar-inverse" role="banner">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/"><img src="http://i.imgur.com/tNVlyfm.png"></a>
-    </div>
-
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="/login"><h2>Login</h2><span class="sr-only">(current)</span></a></li>
-        <li><a href="/signup"><h2>Signup</h2><span class="sr-only">(current)</span></a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-  <%= render "partials/flash" %>
-
-<%= yield %>
-
-    <footer id="footer" class="midnight-blue">
-        <div class="container">
-            <div class="row text-center">
-
-                    <h2><a href="/about">About the Developerszcxvxx</a></h2>
-
-
-            </div>
-        </div>
 
     </footer>
-<% end %>
-<%= debug params %>
-<%= debug @user %>
-
 </body>
 </html>
