@@ -16,38 +16,42 @@ class UsersController < ApplicationController
   end
 
   def show
+
     @user = current_user
+    # render json: @user
+
     # @goals_user = User.goals(goal_params)
     @goals_user = GoalsUser.where(user_id: @user.id)  # join table for goals and users
+    # @goals = Goal.joins(: .where(goal_id {goal_id: @goal.id)
+    temp_goal_id = @goals_user.select(:goal_id)
+    @goals = Goal.where(id: temp_goal_id)
   end
 
   def create
     @user = User.create(user_params)
 
     if @user.errors.any?
-      flash[:danger] = 'Error from controller'
+      flash[:danger] = 'Invalid Entry'
       redirect_to signup_path
     else
-      flash[:success] = 'User has been created'
-      redirect_to login_path
+      session[:user_id] = @user.id
+      flash[:success] = "Sign Up Successful!"
+      redirect_to user_path(@user)
     end
   end
-
 
   def edit
     @user = User.find_by_id(params[:id])
     @goal = Goal.find_by_id(params[:goal_id])
-    redirect_to user_path
   end
 
   def update
-    @user = User.find_by_id(params[:id])
+    @user.phone = params[:user][:phone]
+    @user.save
 
-    @goals.each do |goal_id|
-      @user.goals << Goal.find(goal_id) unless goal_id.blank?
-    end
-
-    redirect_to user_path
+    # @goals.each do |goal_id|
+    #   @user.goals << Goal.find(goal_id) unless goal_id.blank?
+    redirect_to user_path(@user)
   end
 
   def destroy
@@ -59,17 +63,23 @@ class UsersController < ApplicationController
 
   def goals
     @goal = Goal.new
-    @goals_user = GoalsUser.where(user_id: @user.id)
+    @goals_user = GoalsUser.where(user_id: @user.id)  # join table for goals and users
+    # @goals = Goal.joins(: .where(goal_id {goal_id: @goal.id)
+    temp_goal_id = @goals_user.select(:goal_id)
+    @goals = Goal.where(id: temp_goal_id)
   end
 
   def goalshow
-    @goal = User.goal
+    # @goal = GoalsUser
   end
 
   def goals_add
     @goal = Goal.create(goal_params)
-  end
+    GoalsUser.create({user_id:@user.id,goal_id:@goal.id})
+    # @user.goals << GoalsUser
 
+    redirect_to user_path
+  end
 
   def goals_update
   end
@@ -85,9 +95,8 @@ class UsersController < ApplicationController
   end
 
   def goal_params
-    params_require[:goal].permit(:name)
+    params.require(:addgoal).permit(:name)
         # params_require[:goal].permit(:streak_completed, :streak_failed, :completed_today, :max_streak, :max_failed, :active)
-
   end
 
 end

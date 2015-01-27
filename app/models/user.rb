@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password, on: :create
   validates_presence_of :password_confirmation, on: :create
 
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, on: :create
 
   # validates :phone,
   #           format: :with => '1?\s*\W?\s*([2-9][0-8][0-9])\s*\W?\s*([2-9][0-9]{2})\s*\W?\s*([0-9]{4})(\se?x?t?(\d*))?',

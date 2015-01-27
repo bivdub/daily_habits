@@ -25,13 +25,15 @@ Rails.application.routes.draw do
 
   get '/auth/:provider/callback', to: 'sessions#create'
 
-  get "users/:id/goals" => "users#goals"
-  post "users/:id/goals" => "users#goals_add"
+  get "users/:id/goals" => "users#goals", as: :goals
+  post "users/:id/goals" => "users#goals_add", as: :addgoal
   post "users/:id" => "users#goals"
 
-  get "users/:id/goals/:goalid" => "users#goalshow"
+  get "users/:id/goals/:goal_id" => "users#goalshow"
 
   get "users/:id/awards" => "users#awards"
+
+  put "users/update" => "users#goals_update"
 
 
 end

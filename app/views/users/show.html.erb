@@ -9,19 +9,28 @@
     <div class="col-md-9 postbox">
       <h1><%= @user.name %></h1>
 
-      <br>
+<%= link_to "Edit Your Settings", edit_user_path(@user) %>
+<%= link_to "Update Your Goals", goals_path(@user) %>
+
+<!-- AJAX Put in some check off goals completed -->
+
+
+<!-- include partials?? -->
+
+<!-- include badges, progress bar and chart stats -->
+ <br>
       <% if @goals_user.length == 0 %>
         <h3>You have not set any habits yet!</h3>
       <% else %>
       <div>
         <h3><strong><%= @user.name %>'s Goals for Today:</h3></strong>
 
-        <% @goals_user.each do |goal| %>
+        <% @goals.each do |goal| %>
         <div>
 
           <ul>
             <table class="post table-striped">
-              <li> <%= f.collection_check_boxes :goal_ids, @goals, :id, :name %></li>
+              <li> <%= goal.name %><button class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span></button></li>
               <br>
 
             </table>
@@ -34,11 +43,3 @@
 
   </div>
 </div>
-
-
-<!-- include partials?? -->
-
-<!-- include badges, progress bar and chart stats -->
-
-
-

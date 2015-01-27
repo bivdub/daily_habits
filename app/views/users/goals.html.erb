@@ -3,8 +3,8 @@
 
 <h3>Goals</h3>
 
-<% if @goals_user.any? %>
-    <% @goals_user.each do |goal| %>
+<% if @goals.any? %>
+    <% @goals.each do |goal| %>
         <%= goal.name %>
     <% end %>
 <% else %>
@@ -19,7 +19,7 @@
 -->
 
 
-<%= bootstrap_form_for @goal, url: "users/#{@user.id}/goals" do |f| %>
+<%= bootstrap_form_for :addgoal do |f| %>
   <%= f.text_field :name, placeholder: "Enter your custom goal" %>
   <%= f.submit "Submit", class: "btn btn-primary" %>
 <% end %>

@@ -1,9 +1,19 @@
 <!-- edits user info posts to user DB -->
 
 
-<h1><%= @user.name %> Edit Your Profile</h1>
+<h1><%= @user.name %> Edit Your Settings</h1>
 
 
+<!-- User should be able to input/change -->
+<!-- 1) notification setttings
+add phone, add email, neg/pos reinforcement
+location (stretch, sunrise, sunset)-->
+
+
+<%= bootstrap_form_for @user do |f| %>
+  <%= f.text_field :phone ,placeholder: "Enter your 9-digit phone number" %>
+  <%= f.submit "Submit", :class=> "btn btn-primary" %>
+<% end%>
 
 
 
