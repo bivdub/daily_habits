@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   #   self.zipcode = zipcode.gsub(/[^0-9]/, "") if attribute_present?("zipcode")
   # end
 
-  validates :name, presence: true, uniqueness: {case_sensitive: false}
+  validates :name, presence: true
 
   validates :email, presence: true, uniqueness: {case_sensitive: false}
 
