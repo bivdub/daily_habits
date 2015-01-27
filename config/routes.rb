@@ -29,11 +29,11 @@ Rails.application.routes.draw do
   post "users/:id/goals" => "users#goals_add", as: :addgoal
   post "users/:id" => "users#goals"
 
-  get "users/:id/goals/:goal_id" => "users#goalshow"
+  get "users/:id/goals/:goal_id" => "users#goalshow", as: :eachgoal
 
   get "users/:id/awards" => "users#awards"
 
   put "users/update" => "users#goals_update"
-
+  put "users/:id/goalscomplete" => "users#goals_complete", as: :goal_complete
 
 end
