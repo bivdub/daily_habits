@@ -64,9 +64,9 @@ class UsersController < ApplicationController
   def goals
     @goal = Goal.new
     @goals_user = GoalsUser.where(user_id: @user.id)  # join table for goals and users
-    # @goals = Goal.joins(: .where(goal_id {goal_id: @goal.id)
     temp_goal_id = @goals_user.select(:goal_id)
-    @goals = Goal.where(id: temp_goal_id)
+    @users_custom_goals = Goal.where(id: temp_goal_id).where(goal_type: 'user');
+    @goals = Goal.all
   end
 
   def goalshow
@@ -76,7 +76,6 @@ class UsersController < ApplicationController
   def goals_add
     @goal = Goal.create(goal_params)
     GoalsUser.create({user_id:@user.id,goal_id:@goal.id})
-    # @user.goals << GoalsUser
 
     redirect_to user_path
   end

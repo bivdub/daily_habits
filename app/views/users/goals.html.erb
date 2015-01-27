@@ -1,15 +1,150 @@
 <!-- users goals update / create page also posts to goals DB in event of new user inputted goal ; notifications opt in, posts to user DB ; notifications opt in goes to User DB, new goals go to goals DB & goalsusers DB, add new goal that already exists goes to goalsusers db -->
-
-
-<h3>Goals</h3>
-
-<% if @goals.any? %>
-    <% @goals.each do |goal| %>
-        <%= goal.name %>
+<div class="container">
+  <div class="row text-center">
+    <%= bootstrap_form_for :addgoal do |f| %>
+    <%= f.text_field :name, placeholder: "Add a new custom goal" %>
+    <%= f.submit "Submit", class: "btn btn-primary" %>
     <% end %>
-<% else %>
-    <p>No Goals</p>
-<% end %>
+  </div>
+  <% if @users_custom_goals.any? %>
+  <div class="col-xs-6 col-xs-offset-3">
+    <table class="table table-striped">
+      <caption class="text-center">Your Custom Goals</caption>
+      <thead>
+        <tr>
+          <th>Goal</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users_custom_goals.each do |goal| %>
+        <tr>
+          <td><%= goal.name %></td>
+          <td><button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% end %>
+  </div>
+  <br><br>
+
+  <div class="col-xs-6 col-xs-offset-3">
+    <table class="table table-striped">
+      <caption class="text-center">Body</caption>
+      <thead>
+        <tr>
+          <th>Goal</th>
+          <th>Add</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @goals.where(goal_type: "body").each do |goal| %>
+        <tr>
+          <td><%= goal.name %></td>
+          <td><button class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button></td>
+          <td><button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <br><br>
+
+  <div class="col-xs-6 col-xs-offset-3">
+    <table class="table table-striped">
+      <caption class="text-center">Mind</caption>
+      <thead>
+        <tr>
+          <th>Goal</th>
+          <th>Add</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @goals.where(goal_type: "mind").each do |goal| %>
+        <tr>
+          <td><%= goal.name %></td>
+          <td><button class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button></td>
+          <td><button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <br><br>
+
+  <div class="col-xs-6 col-xs-offset-3">
+    <table class="table table-striped">
+      <caption class="text-center">Personal Growth</caption>
+      <thead>
+        <tr>
+          <th>Goal</th>
+          <th>Add</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @goals.where(goal_type: "personal growth").each do |goal| %>
+        <tr>
+          <td><%= goal.name %></td>
+          <td><button class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button></td>
+          <td><button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <br><br>
+
+  <div class="col-xs-6 col-xs-offset-3">
+    <table class="table table-striped">
+      <caption class="text-center">Social</caption>
+      <thead>
+        <tr>
+          <th>Goal</th>
+          <th>Add</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @goals.where(goal_type: "social").each do |goal| %>
+        <tr>
+          <td><%= goal.name %></td>
+          <td><button class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button></td>
+          <td><button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <br><br>
+
+  <div class="col-xs-6 col-xs-offset-3">
+    <table class="table table-striped">
+      <caption class="text-center">World Takeover</caption>
+      <thead>
+        <tr>
+          <th>Goal</th>
+          <th>Add</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @goals.where(goal_type: "world takeover").each do |goal| %>
+        <tr>
+          <td><%= goal.name %></td>
+          <td><button class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button></td>
+          <td><button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <br><br>
+
+</div>
 
 <!--
 1) ajax delete (make goals inactive) button (within table row)
@@ -17,29 +152,3 @@
 3) goals add drop down with hardcoded goals (ability to select dropdown and add them to goals list)
 5) counting the goals as you select prepopulated goals
 -->
-
-
-<%= bootstrap_form_for :addgoal do |f| %>
-  <%= f.text_field :name, placeholder: "Enter your custom goal" %>
-  <%= f.submit "Submit", class: "btn btn-primary" %>
-<% end %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
