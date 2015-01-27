@@ -435,3 +435,7 @@ ul.social_icons li  a i{
 #footer ul > li {
   display: inline-block;
 }
+
+td {
+  vertical-align: middle;
+}
