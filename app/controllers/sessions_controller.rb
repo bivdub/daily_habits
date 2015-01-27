@@ -8,8 +8,8 @@ class SessionsController < ApplicationController
 # FOR AUTH - User.find_or_create_from_auth_hash(auth_hash) ||
     if @user
       session[:user_id] = @user.id
-      flash[:success] = "Login Successful!"
-      redirect_to root_path
+      flash[:success] = "Log In Successful!"
+      redirect_to user_path(@user)
     else
       flash[:danger] = "Credentials Invalid!"
       render :new
