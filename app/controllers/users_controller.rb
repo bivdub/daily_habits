@@ -12,7 +12,6 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-
   end
 
   def show
@@ -25,6 +24,12 @@ class UsersController < ApplicationController
     # @goals = Goal.joins(: .where(goal_id {goal_id: @goal.id)
     temp_goal_id = @goals_user.select(:goal_id)
     @goals = Goal.where(id: temp_goal_id)
+
+    # @goal = Goal.find(params[:id])
+    # @ugoal = GoalsUser.where({user_id:@user.id,goal_id:@goal.id})
+    # #render plain: @ugoal.inspect
+    # #ugoal.update_all(completed_today: "true")
+
   end
 
   def create
@@ -73,6 +78,7 @@ class UsersController < ApplicationController
 
 # INDIVIDUAL GOAL PAGE
   def goalshow
+    @goal = Goal.find_by_id(params[:goal_id])
     # @goal = GoalsUser
   end
 
@@ -85,6 +91,15 @@ class UsersController < ApplicationController
   end
 
 # HARDCODE GOAL ADD on GOALS UPDATE PAGE
+  def goals_complete
+    @goal = Goal.find(params[:id])
+    goal = GoalsUser.where({user_id:@user.id,goal_id:@goal.id})
+    #render plain: goal.inspect
+    goal.update_all(completed_today: "true")
+    render plain: goal.inspect
+    # redirect_to user_path
+  end
+
   def goals_update
     @goal = Goal.find(params[:id])
     goal = GoalsUser.find_or_create_by({user_id:@user.id,goal_id:@goal.id})

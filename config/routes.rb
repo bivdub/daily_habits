@@ -33,11 +33,12 @@ Rails.application.routes.draw do
   post "users/:id/goals" => "users#goals_add", as: :addgoal
   post "users/:id" => "users#goals"
 
-  get "users/:id/goals/:goal_id" => "users#goalshow"
+  get "users/:id/goals/:goal_id" => "users#goalshow", as: :eachgoal
 
   get "users/:id/awards" => "users#awards"
 
   put "users/:id/goals/update" => "users#goals_update", as: "goal_update"
-
+  put "users/update" => "users#goals_update"
+  put "users/:id/goalscomplete" => "users#goals_complete", as: :goal_complete
   put "users/:id/goals/remove" => "users#goals_inactive", as: "goal_inactive"
 end
