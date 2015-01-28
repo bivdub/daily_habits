@@ -15,21 +15,8 @@ class UsersController < ApplicationController
   end
 
   def show
-
     @user = current_user
-    # render json: @user
-
-    # @goals_user = User.goals(goal_params)
-    @goals_user = GoalsUser.where(user_id: @user.id)  # join table for goals and users
-    # @goals = Goal.joins(: .where(goal_id {goal_id: @goal.id)
-    temp_goal_id = @goals_user.select(:goal_id)
-    @goals = Goal.where(id: temp_goal_id)
-
-    # @goal = Goal.find(params[:id])
-    # @ugoal = GoalsUser.where({user_id:@user.id,goal_id:@goal.id})
-    # #render plain: @ugoal.inspect
-    # #ugoal.update_all(completed_today: "true")
-
+    @goals_users = @user.goals_users.where({active:true})
   end
 
   def create
@@ -70,9 +57,8 @@ class UsersController < ApplicationController
 
   def goals
     @goal = Goal.new
-    @goals_user = GoalsUser.where(user_id: @user.id)  # join table for goals and users
-    temp_goal_id = @goals_user.select(:goal_id)
-    @users_custom_goals = Goal.where(id: temp_goal_id).where(goal_type: 'user');
+    @goals_user = @user.goals_users
+    @users_custom_goals = @user.goals.where(goal_type: 'user');
     @goals = Goal.all
   end
 
@@ -92,20 +78,26 @@ class UsersController < ApplicationController
 
 # HARDCODE GOAL ADD on GOALS UPDATE PAGE
   def goals_complete
-    @goal = Goal.find(params[:id])
-    goal = GoalsUser.where({user_id:@user.id,goal_id:@goal.id})
-    #render plain: goal.inspect
-    goal.update_all(completed_today: "true")
-    render plain: goal.inspect
-    # redirect_to user_path
+    goal = Goal.find(params[:id])
+    goals_user = goal.goals_users.where({user_id:@user.id})
+    goals_user.update_all(completed_today: "true")
+    respond_to do |f|
+      f.html {redirect_to user_path}
+      f.json {render json: {success: true}}
+    end
+
   end
 
   def goals_update
     @goal = Goal.find(params[:id])
     goal = GoalsUser.find_or_create_by({user_id:@user.id,goal_id:@goal.id})
-    # goal.update_attribute("active", true)
-    redirect_to user_path
-    # render plain: goal.inspect
+    if !goal.active
+      goal.update_attribute("active", true)
+    end
+    respond_to do |f|
+      f.html {redirect_to user_path}
+      f.json {render json: {success: true}}
+    end
   end
 
 # CUSTOM AND HARDCODE GOAL INACTIVE on GOALS UPDATE PAGE
@@ -113,9 +105,10 @@ class UsersController < ApplicationController
     @goal = Goal.find(params[:id])
     @temp = GoalsUser.where({user_id:@user.id,goal_id:@goal.id})
     @temp.update_all(active: "false")
-
-    redirect_to user_path
-    # render plain: @temp.inspect
+    respond_to do |f|
+      f.html {redirect_to user_path}
+      f.json {render json: {success: true}}
+    end
   end
 
   def awards

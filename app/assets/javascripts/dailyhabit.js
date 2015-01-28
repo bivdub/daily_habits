@@ -1,17 +1,30 @@
 $(document).ready(function(){
-  $(".glyphicon-ok").on("click", function(){
-    console.log($(this))
-    $.ajax({
-      url: "update",
-      data: $(this),
-      type: "PUT",
-      success: function () {
-        $(this).addClass("disabled")
-      }
-
-    })
+  $(".ajax-done-btn").on("click", function(e){
+    e.preventDefault();
+    var btn = $(this);
+    $.ajax(btn.attr('href'),{
+      type:'put',
+      dataType:'json'
+    }).done(function(data){
+      btn.before("DONE!");
+      btn.remove();
+    });
   })
+
+  $('.ajax-goal-add-remove').on("click", function(e){
+    e.preventDefault();
+    var btn = $(this);
+    $.ajax(btn.attr('href'),{
+      type:'put',
+      dataType:'json'
+    }).done(function(data){
+      btn.hide();
+      btn.siblings('a').show();
+    });
+  });
 })
+
+// $.ajax('http://localhost:3000/users/36/goalscomplete',{type:'put',dataType:'json'}).done(function(data){console.log(data);});
 
 // glyphicon to change to something else
 // completed today = true, save that
