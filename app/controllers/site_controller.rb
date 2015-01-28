@@ -3,7 +3,7 @@ class SiteController < ApplicationController
 
   def index
     if @current_user
-       render 'user/show'
+       redirect_to login_path
     end
   end
 
