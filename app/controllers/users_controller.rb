@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   def update
     @user.phone = params[:user][:phone]
     @user.save
-
+    send_text_greeting
     # @goals.each do |goal_id|
     #   @user.goals << Goal.find(goal_id) unless goal_id.blank?
     redirect_to user_path(@user)

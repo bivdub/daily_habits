@@ -14,6 +14,7 @@ class AuthController < ApplicationController
 
         session[:user_id] = @user.id
         redirect_to login_path
+        # redirect_to user_path
     end
 
     def logout

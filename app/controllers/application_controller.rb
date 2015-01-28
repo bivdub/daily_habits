@@ -14,5 +14,29 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by_id(session[:user_id])
   end
 
+# Call this as soon as user adds phone number notification
+  def send_text_greeting
+
+    @client = Twilio::REST::Client.new
+
+    message = @client.account.messages.create(:body => "Welcome to The Daily Habit! Visit thedailyhabit to add goals so we can track your progress.",
+      :to => "+13045490748",     # Replace with your phone number
+      :from => "+13049828749")   # Replace with your Twilio number
+    puts message.sid
+
+  end
+
+# Need to determine how to call this with task/scheduler
+  def send_text
+
+    @client = Twilio::REST::Client.new
+
+    message = @client.account.messages.create(:body => "Did you meet your daily goals today? Visit thedailyhabit to update your status - or else!",
+      :to => "+13045490748",     # Replace with your phone number
+      :from => "+13049828749")   # Replace with your Twilio number
+    puts message.sid
+
+  end
+
 
 end
