@@ -1,13 +1,12 @@
 class UserMailer < ApplicationMailer
-  default :from => "sanda.htyte@gmail.com"
+  default :from => "bksanda2014@gmail.com"
 
   def registration_confirmation(user)
     @user = user
-    mail(:to => "#{user.name}<#{user.email}>", :subject => "Registered") #:from => "sanda.htyte@gmail.com")
+    mail(:to => "#{user.name}<#{user.email}>", :subject => "Registered")
   end
 
   def email_notify(user)
     @user = user
-    mail(:to => "#{user.name}<#{user.email}>", :subject => "Email notifications set") #:from => "sanda.htyte@gmail.com")
-  end
+    mail(:to => "#{user.name}<#{user.email}>", :subject => "Email notifications set")
 end
