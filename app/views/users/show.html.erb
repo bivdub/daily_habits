@@ -19,7 +19,7 @@
 
       <!-- include badges, progress bar and chart stats -->
       <br>
-      <% if @goals.any? %>
+      <% if @goals_users.any? %>
       <div class="col-xs-9">
         <table class="table table-striped">
           <caption class="text-center">Your Custom Goals</caption>
@@ -30,10 +30,17 @@
             </tr>
           </thead>
           <tbody>
-            <% @goals.each do |goal| %>
+            <% @goals_users.each do |goal_user| %>
+            <% goal = goal_user.goal %>
             <tr>
               <td><%= link_to goal.name, eachgoal_path(@user, goal) %></td>
-              <td><%= link_to '<button class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>'.html_safe, goal_complete_path(:id => goal.id), method: :put %></td>
+              <td>
+                <% if goal_user.completed_today %>
+                DONE!
+                <% else %>
+                <%= link_to '<button class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>'.html_safe, goal_complete_path(:id => goal.id), class: "ajax-done-btn" %>
+                <% end %>
+              </td>
             </tr>
             <% end %>
           </tbody>

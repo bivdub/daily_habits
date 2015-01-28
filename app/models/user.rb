@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  has_many :goals_users
   has_many :goals, through: :goals_users
   has_and_belongs_to_many :awards
 
