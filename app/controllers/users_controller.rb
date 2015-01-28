@@ -28,6 +28,7 @@ class UsersController < ApplicationController
     else
       session[:user_id] = @user.id
       flash[:success] = "Sign Up Successful!"
+      UserMailer.registration_confirmation(@user).deliver_now
       redirect_to user_path(@user)
     end
   end
@@ -43,6 +44,10 @@ class UsersController < ApplicationController
     @user.phone = params[:user][:phone]
     @user.save
     send_text_greeting
+
+    @user.email = params[:user][:email]
+    @user.save
+    UserMailer.email_notify(@user).deliver_now
     # @goals.each do |goal_id|
     #   @user.goals << Goal.find(goal_id) unless goal_id.blank?
     redirect_to user_path(@user)
