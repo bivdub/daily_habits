@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   resources :users
 
-  get '/auth/:provider/callback', to: 'sessions#create'
+  # get '/auth/:provider/callback', to: 'sessions#create'
 
   get "users/:id/goals" => "users#goals", as: :goals
   post "users/:id/goals" => "users#goals_add", as: :addgoal
