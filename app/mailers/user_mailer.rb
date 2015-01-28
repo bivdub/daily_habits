@@ -9,4 +9,6 @@ class UserMailer < ApplicationMailer
   def email_notify(user)
     @user = user
     mail(:to => "#{user.name}<#{user.email}>", :subject => "Email notifications set")
+  end
+
 end
