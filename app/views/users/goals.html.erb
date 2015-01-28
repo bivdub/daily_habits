@@ -3,10 +3,10 @@
   <div class="row text-center">
     <%= bootstrap_form_for :addgoal do |f| %>
     <%= f.text_field :name, placeholder: "Add a new custom goal" %>
-    <%= f.submit "Submit", class: "btn btn-primary" %>
+
+    <%= f.submit "Submit", class: "btn btn-primary ajax-add-btn" %>
     <% end %>
   </div>
-  <% if @users_custom_goals.any? %>
   <div class="col-xs-6 col-xs-offset-3">
     <table class="table table-striped">
       <caption class="text-center">Your Custom Goals</caption>
@@ -19,19 +19,23 @@
       <tbody>
         <% @users_custom_goals.each do |goal| %>
         <tr>
+           <% is_active = goal.goals_users.where({user_id:@user.id,active:true}).any? %>
           <td><%= goal.name %></td>
-          <td><%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, goal_inactive_path(:id => goal.id), :class => "btn btn-danger", method: :put %></td>
+          <td>
+            <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, goal_inactive_path(:id => goal.id), :class => "btn btn-danger ajax-goal-add-remove", :style => (is_active ? "" : "display: none") %>
+
+          </td>
         </tr>
         <% end %>
       </tbody>
     </table>
-    <% end %>
+
   </div>
   <br><br>
 
   <div class="col-xs-6 col-xs-offset-3">
     <table class="table table-striped">
-      <caption class="text-center">Body</caption>
+      <caption class="text-center"></caption>
       <thead>
         <tr>
           <th>Goal</th>

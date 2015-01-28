@@ -72,8 +72,10 @@ class UsersController < ApplicationController
   def goals_add
     @goal = Goal.create(goal_params)
     GoalsUser.create({user_id:@user.id,goal_id:@goal.id})
-
-    redirect_to user_path
+    respond_to do |f|
+      f.html {redirect_to user_path}
+      f.json {render json: {success: true}}
+    end
   end
 
 # HARDCODE GOAL ADD on GOALS UPDATE PAGE

@@ -24,6 +24,20 @@ $(document).ready(function(){
   });
 })
 
+
+
+  // $(".ajax-add-btn").on("click", function(e){
+  //   e.preventDefault();
+  //   var btn = $(this);
+  //   $.ajax(btn.attr('href'),{
+  //     type:'post',
+  //     dataType:'json'
+  //   }).done(function(data){
+  //     btn.before("Added!");
+  //     btn.remove();
+  //   });
+  // })
+
 // $.ajax('http://localhost:3000/users/36/goalscomplete',{type:'put',dataType:'json'}).done(function(data){console.log(data);});
 
 // glyphicon to change to something else
