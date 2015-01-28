@@ -85,7 +85,8 @@ class UsersController < ApplicationController
   def goals_complete
     goal = Goal.find(params[:id])
     goals_user = goal.goals_users.where({user_id:@user.id})
-    goals_user.update_all(completed_today: "true")
+    goals_user.first.update(completed_today: "true")
+    update_awards
     respond_to do |f|
       f.html {redirect_to user_path}
       f.json {render json: {success: true}}

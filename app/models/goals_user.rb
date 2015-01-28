@@ -7,7 +7,7 @@ class GoalsUser < ActiveRecord::Base
     self.goal.new_user_on_goal
   end
 
-  before_save(on: :update) do
+  before_save do
     gu_update
   end
 
@@ -38,8 +38,7 @@ class GoalsUser < ActiveRecord::Base
   end
 
   def gu_update
-
-    if self.completed_today && active
+    if self.completed_today
       self.streak_completed += 1
       self.streak_failed = 0
       if self.streak_completed > self.max_streak
