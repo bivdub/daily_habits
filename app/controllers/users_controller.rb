@@ -94,6 +94,7 @@ class UsersController < ApplicationController
     if !goal.active
       goal.update_attribute("active", true)
     end
+    update_awards
     respond_to do |f|
       f.html {redirect_to user_path}
       f.json {render json: {success: true}}
