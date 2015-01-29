@@ -62,9 +62,12 @@ class UsersController < ApplicationController
 
   def goals
     @goal = Goal.new
-    @goals_user = @user.goals_users
+    # active_goal = @user.goals.where.not(goal_type: 'user')
+
+    @goals_user = @user.goals.where.not(goal_type: 'user');
+
     @users_custom_goals = @user.goals.where(goal_type: 'user');
-    @goals = Goal.all
+    @goals = Goal.all.where.not(goal_type: 'user');
   end
 
 # INDIVIDUAL GOAL PAGE
@@ -76,23 +79,27 @@ class UsersController < ApplicationController
 # CUSTOM GOAL ADD on GOALS UPDATE PAGE
   def goals_add
     @goal = Goal.create(goal_params)
-    GoalsUser.create({user_id:@user.id,goal_id:@goal.id})
-
-    redirect_to user_path
+    goal = GoalsUser.create({user_id:@user.id,goal_id:@goal.id})
+    respond_to do |f|
+      f.html {redirect_to goals_path(@user)}
+      f.json {render json: {new_goal:goal,success: true}}
+    end
   end
 
-# HARDCODE GOAL ADD on GOALS UPDATE PAGE
+# HARDCODE GOAL ADD on USR PROFILE PAGE
   def goals_complete
     goal = Goal.find(params[:id])
     goals_user = goal.goals_users.where({user_id:@user.id})
     goals_user.first.update(completed_today: "true")
     update_awards
     respond_to do |f|
-      f.html {redirect_to user_path}
+      f.html {redirect_to goals_path(@user)}
       f.json {render json: {success: true}}
     end
 
   end
+
+  # HARDCODE GOAL ADD on GOAL UPDATE PAGE
 
   def goals_update
     @goal = Goal.find(params[:id])
@@ -102,7 +109,7 @@ class UsersController < ApplicationController
     end
     update_awards
     respond_to do |f|
-      f.html {redirect_to user_path}
+      f.html {redirect_to goals_path(@user)}
       f.json {render json: {success: true}}
     end
   end
@@ -113,7 +120,7 @@ class UsersController < ApplicationController
     @temp = GoalsUser.where({user_id:@user.id,goal_id:@goal.id})
     @temp.update_all(active: "false")
     respond_to do |f|
-      f.html {redirect_to user_path}
+      f.html {redirect_to goals_path(@user)}
       f.json {render json: {success: true}}
     end
   end
