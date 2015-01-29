@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
 # Need to determine how to call this with task/scheduler
-  def send_text
+  def self.send_text
 
     @client = Twilio::REST::Client.new
 
@@ -38,5 +38,15 @@ class ApplicationController < ActionController::Base
 
   end
 
+  def self.send_text_push
+
+    @client = Twilio::REST::Client.new
+
+    message = @client.account.messages.create(:body => "Hey! Looks like you still have goals to complete! You can do it!",
+      :to => "+13045490748",    # Replace with your phone number
+      :from => "+13049828749")   # Replace with your Twilio number
+    puts message.sid
+
+  end
 
 end

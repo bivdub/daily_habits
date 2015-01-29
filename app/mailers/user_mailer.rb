@@ -6,9 +6,19 @@ class UserMailer < ApplicationMailer
     mail(:to => "#{user.name}<#{user.email}>", :subject => "Registered")
   end
 
-  def email_notify(user)
+  # def email_notify(user)
+  #   @user = user
+  #   mail(:to => "#{user.name}<#{user.email}>", :subject => "Email notifications set")
+  # end
+
+  def email_notify_po(user)
     @user = user
-    mail(:to => "#{user.name}<#{user.email}>", :subject => "Email notifications set")
+    mail(:to => user.po_email, :subject => "The Daily Habiter's Watchdog")
+  end
+
+  def email_notify_po_inc(user)
+    @user = user
+    mail(:to => user.po_email, :subject => "Pester away at your Daily Habiter")
   end
 
 end

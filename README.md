@@ -58,9 +58,16 @@ new Morris.Line({
       <td><%= link_to "<button type='button' class='btn btn-primary'>Delete</button>".html_safe, goal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
-  <!-- List out the goals, collection boxes, maybe change to radio buttons later-->
 
-  <%= link to "Update Goals", user_id_goals_path(@user) %>
+<!-- List out the goals, collection boxes, maybe change to radio buttons later-->
+<%= link to "Update Goals", user_id_goals_path(@user) %>
 
+<!-- debugging on application page -->
 <%= debug params %>
 <%= debug @user %>
+
+<!-- edit notifications -->
+<%= bootstrap_form_for @user do |f| %>
+  <%= f.text_field :email, placeholder: "Enter email" %>
+  <%= f.submit "Submit", :class=> "btn btn-primary" %>
+<% end %>

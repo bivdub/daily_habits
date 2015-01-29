@@ -1,0 +1,7 @@
+<p>Hi <%= @user.po_email %>,</p>
+
+<p><%= @user.name %> has selected you to be their accountability partner.</p>
+
+<p>Check out their <%= link_to "goals", user_url(@user) %>. </p>
+
+<p>If <% @user.name %> doesn't finish their daily goals by the end of the day, you'll be notified. And you've been given the go to pester them about the goals they didn't complete as much as you like!</p>
