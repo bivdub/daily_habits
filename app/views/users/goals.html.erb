@@ -1,39 +1,84 @@
 <!-- users goals update / create page also posts to goals DB in event of new user inputted goal ; notifications opt in, posts to user DB ; notifications opt in goes to User DB, new goals go to goals DB & goalsusers DB, add new goal that already exists goes to goalsusers db -->
 <div class="container">
+<div class="row text-center">
+  <div class="col-xs-6 col-md-6">
+  <h2>Custom Active Goals</h2>
+  <hr>
   <div class="row text-center">
-    <%= bootstrap_form_for :addgoal do |f| %>
-    <%= f.text_field :name, placeholder: "Add a new custom goal" %>
-
-    <%= f.submit "Submit", class: "btn btn-primary ajax-add-btn" %>
-    <% end %>
-  </div>
-  <div class="col-xs-6 col-xs-offset-3">
-    <table class="table table-striped">
-      <caption class="text-center">Your Custom Goals</caption>
+  <table class="table table-striped">
       <thead>
-        <tr>
-          <th>Goal</th>
-          <th>Remove</th>
-        </tr>
+
       </thead>
       <tbody>
         <% @users_custom_goals.each do |goal| %>
         <tr>
-           <% is_active = goal.goals_users.where({user_id:@user.id,active:true}).any? %>
+           <% if goal.goals_users.where({user_id:@user.id,active:true}).any? %>
           <td><%= goal.name %></td>
           <td>
-            <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, goal_inactive_path(:id => goal.id), :class => "btn btn-danger ajax-goal-add-remove", :style => (is_active ? "" : "display: none") %>
+            <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, goal_inactive_path(:id => goal.id), :method => :put, :class => "btn btn-danger ajax-goal-custom-remove" %>
 
           </td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="row text-center">
+  <h2>More Active Goals</h2>
+  <hr>
+
+  <table class="table table-striped">
+      <caption class="text-center"></caption>
+
+      <tbody>
+        <% @goals_user.each do |goal| %>
+        <% if goal.goals_users.where({user_id:@user.id,active:true}).any? %>
+        <tr>
+
+          <td><%= goal.name.capitalize %></td>
+          <td>
+            <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, goal_inactive_path(:id => goal.id), :method => :put, :class => "btn btn-danger ajax-goal-add-remove" %>
+          </td>
+          <% end %>
         </tr>
         <% end %>
       </tbody>
     </table>
 
-  </div>
-  <br><br>
 
-  <div class="col-xs-6 col-xs-offset-3">
+
+  </div>
+
+
+
+
+  </div>
+  <div class="col-xs-6 col-md-6">
+  <h2>Add a custom goal </h2>
+  <hr>
+  <div class="row text-center">
+  <table class="table text-center">
+  <tbody>
+  <tr>
+  <td>
+    <%= bootstrap_form_for :addgoal, html:{class: 'ajax-goal-form'} do |f| %>
+    <%= f.text_field :name, hide_label: true, placeholder: "Add a new custom goal" %>
+  </td>
+
+  <td>
+    <%= button_tag(type: 'submit', class: "btn btn-success") do %>
+      <i class="glyphicon glyphicon-ok"></i>
+    <% end %>
+    <% end %>
+  </td>
+  </tr>
+  </tbody>
+  </table>
+  </div>
+  <h2>Add other goals</h2>
+  <hr>
+  <div class="row text-center">
     <table class="table table-striped">
       <caption class="text-center"></caption>
       <thead>
@@ -45,27 +90,19 @@
       </thead>
       <tbody>
         <% @goals.each do |goal| %>
+            <% is_inactive = goal.goals_users.where({user_id:@user.id,active:false}).any? %>
         <tr class="goal-row goal-type-<%= goal.goal_type.gsub(/\s+/, '-') %>">
           <td><%= goal.name.capitalize %></td>
           <td><%= goal.goal_type.capitalize %></td>
           <td>
-          <% is_active = goal.goals_users.where({user_id:@user.id,active:true}).any? %>
-            <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, goal_inactive_path(:id => goal.id), :class => "btn btn-danger ajax-goal-add-remove", :style => (is_active ? "" : "display: none") %>
-            <%= link_to '<span class="glyphicon glyphicon-ok"></span>'.html_safe, goal_update_path(:id => goal.id), :class => "btn btn-success ajax-goal-add-remove", :style => (is_active ? "display: none" : "")  %>
+            <%= link_to '<span class="glyphicon glyphicon-ok"></span>'.html_safe, goal_update_path(:id => goal.id), :method => :put, :class => "btn btn-success ajax-goal-add-remove"  %>
           </td>
         </tr>
         <% end %>
       </tbody>
     </table>
+
   </div>
-  <br><br>
-
-
+  </div>
 </div>
-
-<!--
-1) ajax delete (make goals inactive) button (within table row)
-2) form for custom create and make that ajax so it appears in the list of goals
-3) goals add drop down with hardcoded goals (ability to select dropdown and add them to goals list)
-5) counting the goals as you select prepopulated goals
--->
+</div>

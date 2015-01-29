@@ -1,42 +1,50 @@
-$(document).ready(function(){
-  $(".ajax-done-btn").on("click", function(e){
-    e.preventDefault();
-    var btn = $(this);
-    $.ajax(btn.attr('href'),{
-      type:'put',
-      dataType:'json'
-    }).done(function(data){
-      btn.before("DONE!");
-      btn.remove();
-    });
-  })
+// $(document).ready(function(){
+//   $(".ajax-done-btn").on("click", function(e){
+//     e.preventDefault();
+//     var btn = $(this);
+//     $.ajax(btn.attr('href'),{
+//       type:'put',
+//       dataType:'json'
+//     }).done(function(data){
+//       btn.before("DONE!");
+//       btn.remove();
+//     });
+//   })
 
-  $('.ajax-goal-add-remove').on("click", function(e){
-    e.preventDefault();
-    var btn = $(this);
-    $.ajax(btn.attr('href'),{
-      type:'put',
-      dataType:'json'
-    }).done(function(data){
-      btn.hide();
-      btn.siblings('a').show();
-    });
-  });
-})
+//   $('.ajax-goal-add-remove').on("click", function(e){
+//     e.preventDefault();
+       // e.stopPropagation();
+//     var btn = $(this);
+//     $.ajax(btn.attr('href'),{
+//       type:'put',
+//       dataType:'json'
+//     }).done(function(data){
+//      var = btn.closest('tr').hide();
+//       btn.remove();
+//     });
+//   });
 
-
-
-  // $(".ajax-add-btn").on("click", function(e){
+// $('.ajax-goal-custom-remove').on("click", function(e){
+//     e.preventDefault();
+//     var btn = $(this);
+//     $.ajax(btn.attr('href'),{
+//       type:'put',
+//       dataType:'json'
+//     }).done(function(data){
+//       btn.hide();
+//       btn.closest('tr').hide();
+//     });
+//   });
+  // $(".ajax-goal-form").on("submit", function(e){
   //   e.preventDefault();
-  //   var btn = $(this);
-  //   $.ajax(btn.attr('href'),{
-  //     type:'post',
-  //     dataType:'json'
-  //   }).done(function(data){
-  //     btn.before("Added!");
-  //     btn.remove();
-  //   });
-  // })
+
+  // });
+
+}); // end document ready
+
+
+
+
 
 // $.ajax('http://localhost:3000/users/36/goalscomplete',{type:'put',dataType:'json'}).done(function(data){console.log(data);});
 
