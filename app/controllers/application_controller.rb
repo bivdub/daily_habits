@@ -25,13 +25,13 @@ class ApplicationController < ActionController::Base
   end
 
 
-# Need to determine how to call this with task/scheduler
+  # Need to determine how to call this with task/scheduler
   def self.send_text
     @client = Twilio::REST::Client.new
 
     message = @client.account.messages.create(:body => "Did you meet your daily goals today? Visit thedailyhabit.herokuapp.com to update your status - or else!",
-      :to => "+13045490748",     # Replace with your phone number
-      :from => "+13049828749")   # Replace with your Twilio number
+        :to => "+13045490748",     # Replace with your phone number
+        :from => "+13049828749")   # Replace with your Twilio number
     puts message.sid
 
   end
@@ -78,7 +78,6 @@ class ApplicationController < ActionController::Base
       a.save
       alert("WOOT!")
     end
-
   end
 
   def self.send_text_push
