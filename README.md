@@ -66,8 +66,87 @@ new Morris.Line({
 <%= debug params %>
 <%= debug @user %>
 
-<!-- edit notifications -->
-<%= bootstrap_form_for @user do |f| %>
-  <%= f.text_field :email, placeholder: "Enter email" %>
-  <%= f.submit "Submit", :class=> "btn btn-primary" %>
-<% end %>
+<<<<<<< HEAD
+
+GRAVEYARD OF GOALS UPDATE AJAX FOR REFERENCE:
+
+
+
+
+
+
+
+
+
+
+  <div class="row text-center">
+    <%= bootstrap_form_for :addgoal, html:{class: 'ajax-goal-form'} do |f| %>
+    <%= f.text_field :name, placeholder: "Add a new custom goal" %>
+    <%= button_tag(type: 'submit', class: "btn btn-success") do %>
+      <i class="glyphicon glyphicon-ok"></i>
+    <% end %>
+    <% end %>
+  </div>
+  <div class="col-xs-6 col-xs-offset-3">
+    <table class="table table-striped">
+      <caption class="text-center">Your Custom Goals</caption>
+      <thead>
+        <tr>
+          <th>Goal</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users_custom_goals.each do |goal| %>
+        <tr>
+           <% is_active = goal.goals_users.where({user_id:@user.id,active:true}).any? %>
+          <td><%= goal.name %></td>
+          <td>
+            <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, goal_inactive_path(:id => goal.id), :class => "btn btn-danger ajax-goal-custom-remove", :style => (is_active ? "" : "display: none") %>
+
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+  <br><br>
+
+  <div class="col-xs-6 col-xs-offset-3">
+    <table class="table table-striped">
+      <caption class="text-center"></caption>
+      <thead>
+        <tr>
+          <th>Goal</th>
+          <th>Type</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @goals.each do |goal| %>
+        <tr class="goal-row goal-type-<%= goal.goal_type.gsub(/\s+/, '-') %>">
+          <td><%= goal.name.capitalize %></td>
+          <td><%= goal.goal_type.capitalize %></td>
+          <td>
+          <% is_active = goal.goals_users.where({user_id:@user.id,active:true}).any? %>
+            <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, goal_inactive_path(:id => goal.id), :class => "btn btn-danger ajax-goal-add-remove", :style => (is_active ? "" : "display: none") %>
+            <%= link_to '<span class="glyphicon glyphicon-ok"></span>'.html_safe, goal_update_path(:id => goal.id), :class => "btn btn-success ajax-goal-add-remove", :style => (is_active ? "display: none" : "")  %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <br><br>
+
+
+</div>
+
+<!--
+1) ajax delete (make goals inactive) button (within table row)
+2) form for custom create and make that ajax so it appears in the list of goals
+3) goals add drop down with hardcoded goals (ability to select dropdown and add them to goals list)
+5) counting the goals as you select prepopulated goals
+-->
+

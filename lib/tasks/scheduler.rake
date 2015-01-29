@@ -26,7 +26,7 @@ task :email_notify_po_inc => :environment do
 end
 
 task :send_text_push => :environment do
-  User.all.select{|user| user.phone == "13045490748"}.each do |user|
+  User.all.select{|user| user.phone != nil}.each do |user|
     puts "user_id #{user.id} - phone: #{user.phone}"
     goals_users = user.goals_users
     failed_goals = goals_users.select{|goal| goal.active && !goal.completed_today}
