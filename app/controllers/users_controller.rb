@@ -17,6 +17,16 @@ class UsersController < ApplicationController
   def show
     @user = current_user
     @goals_users = @user.goals_users.where({active:true})
+    @streak_completed, @max_streak, @total_completions = 0, 0, 0
+    @user.goals_users.each do |goal|
+      @streak_completed += goal.streak_completed
+      @max_streak += goal.max_streak
+    end
+
+    @user.awards.each do |award|
+      @total_completions += award.total_completions
+    end
+
   end
 
   def create

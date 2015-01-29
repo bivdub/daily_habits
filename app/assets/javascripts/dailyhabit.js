@@ -13,7 +13,7 @@
 
 //   $('.ajax-goal-add-remove').on("click", function(e){
 //     e.preventDefault();
-       // e.stopPropagation();
+//        e.stopPropagation();
 //     var btn = $(this);
 //     $.ajax(btn.attr('href'),{
 //       type:'put',
@@ -35,10 +35,10 @@
 //       btn.closest('tr').hide();
 //     });
 //   });
-  // $(".ajax-goal-form").on("submit", function(e){
-  //   e.preventDefault();
+//   $(".ajax-goal-form").on("submit", function(e){
+//     e.preventDefault();
 
-  // });
+//   });
 
 }); // end document ready
 
