@@ -12,10 +12,14 @@ location (stretch, sunrise, sunset)-->
 
 <%= bootstrap_form_for @user do |f| %>
   <%= f.text_field :phone ,placeholder: "Enter your 9-digit phone number" %>
-  <%= f.text_field :email, placeholder: "Enter email" %>
+  <%= f.submit "Submit", :class=> "btn btn-primary" %>
+<% end %>
+
+<%= bootstrap_form_for @user do |f| %>
   <%= f.text_field :po_email, placeholder: "Enter po email" %>
   <%= f.submit "Submit", :class=> "btn btn-primary" %>
-<% end%>
+<% end %>
+
 
 
 

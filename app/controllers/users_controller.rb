@@ -41,15 +41,27 @@ class UsersController < ApplicationController
 
 # USER SETTINGS UPDATE METHOD
   def update
-    @user.phone = params[:user][:phone]
-    @user.save
-    send_text_greeting
-
-    @user.email = params[:user][:email]
-    @user.save
-    UserMailer.email_notify(@user).deliver_now
+    if @user.phone = params[:user][:phone]
+      @user.save
+      send_text_greeting
+    else
+      @user.po_email = params[:user][:po_email]
+      @user.save
+      UserMailer.email_notify_po(@user).deliver_now
+    end
     # @goals.each do |goal_id|
     #   @user.goals << Goal.find(goal_id) unless goal_id.blank?
+
+
+    #notify po email if goals are active
+    # @user.po_email = params[:user][:po_email]
+    # @user.save
+    # @goal = Goal.find(params[:id])
+    # goal = GoalsUser.find_or_create_by({user_id:@user.id,goal_id:@goal.id})
+    # if goal.active == true
+    #   UserMailer.email_notify_po_inc(@user).deliver_now
+    # end
+
     redirect_to user_path(@user)
   end
 
@@ -62,9 +74,12 @@ class UsersController < ApplicationController
 
   def goals
     @goal = Goal.new
-    @goals_user = @user.goals_users
+    # active_goal = @user.goals.where.not(goal_type: 'user')
+
+    @goals_user = @user.goals.where.not(goal_type: 'user');
+
     @users_custom_goals = @user.goals.where(goal_type: 'user');
-    @goals = Goal.all
+    @goals = Goal.all.where.not(goal_type: 'user');
   end
 
 # INDIVIDUAL GOAL PAGE
@@ -76,22 +91,27 @@ class UsersController < ApplicationController
 # CUSTOM GOAL ADD on GOALS UPDATE PAGE
   def goals_add
     @goal = Goal.create(goal_params)
-    GoalsUser.create({user_id:@user.id,goal_id:@goal.id})
-
-    redirect_to user_path
+    goal = GoalsUser.create({user_id:@user.id,goal_id:@goal.id})
+    respond_to do |f|
+      f.html {redirect_to goals_path(@user)}
+      f.json {render json: {new_goal:goal,success: true}}
+    end
   end
 
-# HARDCODE GOAL ADD on GOALS UPDATE PAGE
+# HARDCODE GOAL ADD on USR PROFILE PAGE
   def goals_complete
     goal = Goal.find(params[:id])
     goals_user = goal.goals_users.where({user_id:@user.id})
-    goals_user.update_all(completed_today: "true")
+    goals_user.first.update(completed_today: "true")
+    update_awards
     respond_to do |f|
-      f.html {redirect_to user_path}
+      f.html {redirect_to goals_path(@user)}
       f.json {render json: {success: true}}
     end
 
   end
+
+  # HARDCODE GOAL ADD on GOAL UPDATE PAGE
 
   def goals_update
     @goal = Goal.find(params[:id])
@@ -99,8 +119,9 @@ class UsersController < ApplicationController
     if !goal.active
       goal.update_attribute("active", true)
     end
+    update_awards
     respond_to do |f|
-      f.html {redirect_to user_path}
+      f.html {redirect_to goals_path(@user)}
       f.json {render json: {success: true}}
     end
   end
@@ -111,7 +132,7 @@ class UsersController < ApplicationController
     @temp = GoalsUser.where({user_id:@user.id,goal_id:@goal.id})
     @temp.update_all(active: "false")
     respond_to do |f|
-      f.html {redirect_to user_path}
+      f.html {redirect_to goals_path(@user)}
       f.json {render json: {success: true}}
     end
   end

@@ -4,8 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :current_user
 
-  before_action :current_user
-
   def is_authenticated?
     redirect_to login_path unless current_user
   end
@@ -14,29 +12,84 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by_id(session[:user_id])
   end
 
-# Call this as soon as user adds phone number notification
+  # Call this as soon as user adds phone number notification
   def send_text_greeting
 
     @client = Twilio::REST::Client.new
 
     message = @client.account.messages.create(:body => "Welcome to The Daily Habit! Visit thedailyhabit to add goals so we can track your progress.",
+        :to => "+13045490748",     # Replace with your phone number
+        :from => "+13049828749")   # Replace with your Twilio number
+    puts message.sid
+
+  end
+
+
+# Need to determine how to call this with task/scheduler
+  def self.send_text
+    @client = Twilio::REST::Client.new
+
+    message = @client.account.messages.create(:body => "Did you meet your daily goals today? Visit thedailyhabit.herokuapp.com to update your status - or else!",
       :to => "+13045490748",     # Replace with your phone number
       :from => "+13049828749")   # Replace with your Twilio number
     puts message.sid
 
   end
 
-# Need to determine how to call this with task/scheduler
-  def send_text
+  def update_awards
+
+    #NEWBIE - Add a goal
+    if @current_user.goals.any? && !@current_user.awards.find_by_id(2)
+      a = Award.find_by_id(2)
+      @current_user.awards << a
+      a.total_completions += 1
+      a.save
+    end
+
+    #INTRO TO YOUR BODY - Add a body goal
+    if @current_user.goals.where(goal_type: "body").any? && !@current_user.awards.find_by_id(3)
+      a = Award.find_by_id(3)
+      @current_user.awards << a
+      a.total_completions += 1
+      a.save
+    end
+
+    #QUICK STARTER - Avoid hitting Snooze for 3 days
+    if @current_user.goals_users.where(goal_id: 23).any? && @current_user.goals_users.where(goal_id: 23)[0].streak_completed >= 3 && !@current_user.awards.find_by_id(4)
+      a = Award.find_by_id(4)
+      @current_user.awards << Award.find_by_id(4)
+      a.total_completions += 1
+      a.save
+    end
+
+    #3 X 3 - Keep at least 3 goals for 3 days
+    if @current_user.goals_users.select{|goal| goal.streak_completed >= 3}.length >= 3 && !@current_user.awards.find_by_id(5)
+      a = Award.find_by_id(5)
+      @current_user.awards << Award.find_by_id(5)
+      a.total_completions += 1
+      a.save
+    end
+
+    #10 SPOT - put at least 10 active goals on your list
+    if (@current_user.goals_users.where(active: true).length >= 10) && !@current_user.awards.find_by_id(6)
+      a = Award.find_by_id(6)
+      @current_user.awards << Award.find_by_id(6)
+      a.total_completions += 1
+      a.save
+      alert("WOOT!")
+    end
+
+=======
+  def self.send_text_push
 
     @client = Twilio::REST::Client.new
 
-    message = @client.account.messages.create(:body => "Did you meet your daily goals today? Visit thedailyhabit to update your status - or else!",
-      :to => "+13045490748",     # Replace with your phone number
+    message = @client.account.messages.create(:body => "Hey! Looks like you still have goals to complete! You can do it!",
+      :to => "+13045490748",    # Replace with your phone number
       :from => "+13049828749")   # Replace with your Twilio number
     puts message.sid
+>>>>>>> c5b29fbcbde0b35c6e8f811891882fd8a0a4814b
 
   end
-
 
 end

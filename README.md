@@ -58,13 +58,15 @@ new Morris.Line({
       <td><%= link_to "<button type='button' class='btn btn-primary'>Delete</button>".html_safe, goal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
-  <!-- List out the goals, collection boxes, maybe change to radio buttons later-->
 
-  <%= link to "Update Goals", user_id_goals_path(@user) %>
+<!-- List out the goals, collection boxes, maybe change to radio buttons later-->
+<%= link to "Update Goals", user_id_goals_path(@user) %>
 
+<!-- debugging on application page -->
 <%= debug params %>
 <%= debug @user %>
 
+<<<<<<< HEAD
 
 GRAVEYARD OF GOALS UPDATE AJAX FOR REFERENCE:
 
@@ -147,3 +149,4 @@ GRAVEYARD OF GOALS UPDATE AJAX FOR REFERENCE:
 3) goals add drop down with hardcoded goals (ability to select dropdown and add them to goals list)
 5) counting the goals as you select prepopulated goals
 -->
+
