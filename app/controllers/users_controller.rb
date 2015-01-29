@@ -115,10 +115,15 @@ class UsersController < ApplicationController
 
 # HARDCODE GOAL ADD on USR PROFILE PAGE
   def goals_complete
-    goal = Goal.find(params[:id])
-    goals_user = goal.goals_users.where({user_id:@user.id})
-    goals_user.first.update(completed_today: "true")
-    update_awards
+    # goal = Goal.find(params[:id])
+    @goals_user = GoalsUser.where(user_id:@user.id).where(goal_id: params[:id])
+    @goals_user.map do |goal, index|
+      goal.update_attributes(completed_today: true)
+      goal.gu_update
+      goal.save
+    end
+    # goals_user.save_all
+    # update_awards
     respond_to do |f|
       f.html {redirect_to goals_path(@user)}
       f.json {render json: {success: true}}

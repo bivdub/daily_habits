@@ -1,15 +1,15 @@
-// $(document).ready(function(){
-//   $(".ajax-done-btn").on("click", function(e){
-//     e.preventDefault();
-//     var btn = $(this);
-//     $.ajax(btn.attr('href'),{
-//       type:'put',
-//       dataType:'json'
-//     }).done(function(data){
-//       btn.before("DONE!");
-//       btn.remove();
-//     });
-//   })
+$(document).ready(function(){
+  $(".ajax-done-btn").on("click", function(e){
+    e.preventDefault();
+    var btn = $(this);
+    $.ajax(btn.attr('href'),{
+      type:'put',
+      dataType:'json'
+    }).done(function(data){
+      btn.before("DONE!");
+      btn.remove();
+    });
+  })
 
 //   $('.ajax-goal-add-remove').on("click", function(e){
 //     e.preventDefault();
@@ -40,7 +40,7 @@
 
 //   });
 
-// }); // end document ready
+}); // end document ready
 
 
 

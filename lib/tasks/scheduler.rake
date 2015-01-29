@@ -1,11 +1,11 @@
 desc "This task is called by the Heroku scheduler add-on"
 task :update_stats => :environment do
   puts "Updating feed..."
-  Goal.all.each do |goal|
+  Goal.all.map do |goal|
     goal.update_stats
     goal.save
   end
-  GoalsUser.all.each do |goal|
+  GoalsUser.all.map do |goal|
     goal.reset
     goal.save
   end

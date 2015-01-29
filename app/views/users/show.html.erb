@@ -23,10 +23,10 @@
     <div class="col-xs-2">
       <h2>Badges</h2>
       <% if @user.awards.any? %>
-      <% @user.awards.each do |award|%>
-      <h3 class="badge-name"><%= award.name %></h3>
-      <%= image_tag 'badges/'+award.image_url, title: award.desc, size: "100" %>
-      <% end %>
+        <% @user.awards.each do |award|%>
+          <h3 class="badge-name"><%= award.name %></h3>
+          <%= image_tag 'badges/'+award.image_url, title: award.desc, size: "100" %>
+        <% end %>
       <% end %>
     </div>
     <% if @goals_users.any? %>
