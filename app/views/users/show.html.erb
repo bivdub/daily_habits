@@ -8,8 +8,7 @@
     <div class="col-xs-8 col-xs-offset-2">
       <h1><%= @user.name %></h1>
 
-      <%= link_to "Edit Your Settings", edit_user_path(@user) %>
-      <%= link_to "Update Your Goals", goals_path(@user) %>
+      <%= link_to "Edit Your Contact Settings", edit_user_path(@user) %>
 
       <!-- AJAX Put in some check off goals completed -->
 
@@ -33,49 +32,48 @@
     <% if @goals_users.any? %>
     <div class="col-xs-8">
       <table class="table table-striped">
-        <h2 class="text-center">Your Daily Goals</h3>
-          <thead>
-            <tr>
-              <th>Goal</th>
-              <th>Done Today?</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @goals_users.sort.each do |goal_user| %>
-            <% goal = goal_user.goal %>
-            <tr>
-              <td><%= link_to goal.name.capitalize, eachgoal_path(@user, goal) %></td>
-              <td>
-                <% if goal_user.completed_today %>
-                DONE!
-                <% else %>
-                <%= link_to '<button class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>'.html_safe, goal_complete_path(:id => goal.id), class: "ajax-done-btn" %>
-                <% end %>
-              </td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <% else %>
-        <h1><a href="/users/<%=@user.id%>/goals">CLICK HERE TO ADD GOALS!</a></h1>
-        <% end %>
-      </div>
-
-      <br><br>
-
+        <h2 class="text-center">Your Daily Goals</h2>
+        <thead>
+          <tr>
+            <th>Goal</th>
+            <th>Done Today?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @goals_users.sort.each do |goal_user| %>
+          <% goal = goal_user.goal %>
+          <tr>
+            <td><%= link_to goal.name.capitalize, eachgoal_path(@user, goal) %></td>
+            <td>
+              <% if goal_user.completed_today %>
+              DONE!
+              <% else %>
+              <%= link_to '<button class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>'.html_safe, goal_complete_path(:id => goal.id), class: "ajax-done-btn" %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <% else %>
+      <h1><a href="/users/<%=@user.id%>/goals">CLICK HERE TO ADD GOALS!</a></h1>
+      <% end %>
     </div>
-    <div class="row">
-      <div class="col-xs-8 col-xs-offset-2">
-        <div id="streakChart" style="height: 250px;"></div>
-      </div>
+
+    <br><br>
+
+  </div>
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <div id="streakChart" style="height: 250px;"></div>
     </div>
   </div>
+</div>
 
-  <script>
-
-    new Morris.Bar({
+<script>
+  new Morris.Bar({
     // ID of the element in which to draw the chart.
-      element: 'streakChart',
+    element: 'streakChart',
       // Chart data records -- each entry in this array corresponds to a point on
       // the chart.
       data: [
@@ -92,5 +90,5 @@
       labels: ['Value']
     });
 
-  </script>
+</script>
 

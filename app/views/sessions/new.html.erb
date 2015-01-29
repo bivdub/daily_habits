@@ -1,13 +1,10 @@
 <!-- login form include facebook auth login / bootstrap form for login, redirect to profile -->
 <div class="container">
 <% if @current_user %>
-    Hello again, <%= @current_user.name %>
+    <h2>Hello again, <%= @current_user.name %></h2>
     <br><br>
-    <a href="/auth/logout">logout</a>
 <% else %>
-    You are not logged in.<br><br>
-    Login with:
-    <a href="/auth/facebook">Facebook</a> |
+   <h2>Login with <a href="/auth/facebook">Facebook</a></h2>
     <br><br>
 <% end %>
 <p>Already a member? Login:</p>

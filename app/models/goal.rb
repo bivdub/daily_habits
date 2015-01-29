@@ -7,6 +7,7 @@ class Goal < ActiveRecord::Base
     initialize_goal
   end
 
+  validates :name, presence: true
 
   def initialize_goal
     self.goal_type ||= "user"
@@ -33,4 +34,5 @@ class Goal < ActiveRecord::Base
     self.users_ever = goals_users.length
     self.users_currently = active_goals_users.length
   end
+
 end

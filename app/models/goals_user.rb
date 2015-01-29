@@ -2,9 +2,11 @@ class GoalsUser < ActiveRecord::Base
   belongs_to :goal
   belongs_to :user
 
-  before_create do
+  validates :goal_id, presence: true
+
+  after_validation do
     initialize_gu
-    self.goal.new_user_on_goal
+    self.goal.new_user_on_goal if self.goal
   end
 
   before_save do
@@ -12,7 +14,6 @@ class GoalsUser < ActiveRecord::Base
   end
 
   def reset
-
     if self.completed_today && active
       self.completed_today = false
     elsif active

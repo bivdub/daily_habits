@@ -11,28 +11,17 @@ location (stretch, sunrise, sunset)-->
 
 <div class="row">
   <div class="col-xs-8 col-xs-offset-2">
-  <h3>&nbsp&nbsp&nbspEnter your 9-digit phone number and opt in to text messages</h3>
-  <%= bootstrap_form_for @user do |f| %>
-    <div class="col-xs-9">
-    <%= f.text_field :phone,hide_label: "Enter a phone number and opt in to text messages",placeholder: @user.phone ? @user.phone : "Enter your phone number" %>
-    </div>
-    <div class="col-xs-3">
-    <%= f.submit "Submit", :class=> "btn btn-primary" %>
-    </div>
-    <% end %>
-  </div>
-</div>
-<br><br>
-<div class="row">
-  <div class="col-xs-8 col-xs-offset-2">
-<h3>&nbsp&nbsp&nbspAdd an email of someone you want to receive an email if you don't complete your goals</h3>
+    <h3 class="text-center">Enter your 10-digit phone number and opt in to text messages</h3>
     <%= bootstrap_form_for @user do |f| %>
-    <div class="col-xs-9">
-    <%= f.text_field :po_email, hide_label: "Add an email of someone you want to receive an email if you don't complete your goals",  placeholder: "Add an email" %>
+    <div class="row">
+      <%= f.text_field :phone,hide_label: "Enter a phone number and opt in to text messages",placeholder: @user.phone ? @user.phone : "Enter your phone number" %>
+      <h3 class="text-center">&nbsp&nbsp&nbspAdd an email of someone you want to receive an email if you don't complete your goals</h3>
+      <%= f.text_field :po_email, hide_label: "Add an email of someone you want to receive an email if you don't complete your goals",  placeholder: "Add an email" %>
     </div>
-    <div class="col-xs-3">
-    <%= f.submit "Submit", :class=> "btn btn-primary" %>
+    <div class="text-center">
+      <%= f.submit "Submit", :class=> "btn btn-primary" %>
     </div>
+    <br><br>
     <% end %>
   </div>
 </div>

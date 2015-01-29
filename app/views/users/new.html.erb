@@ -1,21 +1,24 @@
 <!-- sign up includes facebook, bootstrap form, redirects user profile -->
-
-<% if @current_user %>
+<div class="container text-center">
+  <div class="row">
+    <% if @current_user %>
     Hello again, <%= @current_user.name %>
     <br><br>
-    <a href="/auth/logout">logout</a>
-<% else %>
-    You are not logged in.<br><br>
-    Login with:
-    <a href="/auth/facebook">Facebook</a> |
+    <% else %>
+    <h2>Sign up and log in with <a href="/auth/facebook">Facebook</a></h2>
     <br><br>
-<% end %>
-
-<%= bootstrap_form_for @user do |f| %>
-  <%= f.text_field :name, placeholder: "Enter your name", icon: "user" %>
-  <%= f.text_field :email, placeholder: "Enter your email", icon: "envelope" %>
-  <%= f.password_field :password, placeholder: "Enter your password", icon: "lock" %>
-  <%= f.password_field :password_confirmation, label: "Confirm Password", icon: "lock" %>
-  <%= f.submit "Sign Up!", :class=> "btn btn-primary" %>
-
-<% end %>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <%= bootstrap_form_for @user do |f| %>
+      <%= f.text_field :name, placeholder: "Enter your name", icon: "user" %>
+      <%= f.text_field :email, placeholder: "Enter your email", icon: "envelope" %>
+      <%= f.password_field :password, placeholder: "Enter your password", icon: "lock" %>
+      <%= f.password_field :password_confirmation, label: "Confirm Password", icon: "lock" %>
+      <%= f.submit "Sign Up!", :class=> "btn btn-primary" %>
+      <br><br>
+      <% end %>
+    </div>
+  </div>
+</div>

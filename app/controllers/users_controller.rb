@@ -23,9 +23,10 @@ class UsersController < ApplicationController
       @max_streak += goal.max_streak
     end
 
-    @user.awards.each do |award|
-      @total_completions += award.total_completions
-    end
+    ##### ASK ABOUT
+    # @user.awards.each do |award|
+    #   @total_completions += award.total_completions
+    # end
 
   end
 
@@ -51,10 +52,14 @@ class UsersController < ApplicationController
 
 # USER SETTINGS UPDATE METHOD
   def update
-    if @user.phone = params[:user][:phone]
+    if @user.phone != params[:user][:phone]
+      @user.phone = params[:user][:phone]
+      @user.po_email = params[:user][:po_email]
       @user.save
       send_text_greeting
-    else
+    end
+    if @user.po_email != params[:user][:po_email]
+      @user.phone = params[:user][:phone]
       @user.po_email = params[:user][:po_email]
       @user.save
       UserMailer.email_notify_po(@user).deliver_now
@@ -72,7 +77,7 @@ class UsersController < ApplicationController
     #   UserMailer.email_notify_po_inc(@user).deliver_now
     # end
 
-    redirect_to user_path(@user)
+    redirect_to edit_user_path(@user)
   end
 
   # def destroy
