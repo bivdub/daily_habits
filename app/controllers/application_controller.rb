@@ -78,8 +78,8 @@ class ApplicationController < ActionController::Base
       a.save
       alert("WOOT!")
     end
+  end
 
-=======
   def self.send_text_push
 
     @client = Twilio::REST::Client.new
@@ -88,7 +88,7 @@ class ApplicationController < ActionController::Base
       :to => "+13045490748",    # Replace with your phone number
       :from => "+13049828749")   # Replace with your Twilio number
     puts message.sid
->>>>>>> c5b29fbcbde0b35c6e8f811891882fd8a0a4814b
+
 
   end
 
