@@ -99,8 +99,30 @@ class UsersController < ApplicationController
 
 # INDIVIDUAL GOAL PAGE
   def goalshow
+    @user = current_user
     @goal = Goal.find_by_id(params[:goal_id])
+
+
+    # INPUTTING DATA FOR GOAL PAGE
+    @goal_user = @user.goals_users.where({goal_id:@goal.id})
+    @goals_users = @user.goals_users.where({active:true})
+    @goal_total = Goal.total_completions
+
+    #@goal_total = @user.goals_user.goal.where({total_completions:@total_completions})
+    # @goal_total = @user.@goals_users.@goals.where({total_completions:@total_completions})
+    # @goal_stat = @goal_user.goals
+    # # goal_user = goal.goals_users.where({user_id:@user.id})
+    # @total = goal_user.goal.total_completions
     # @goal = GoalsUser
+    # @goals_users = user.goals_users.where({active:true})
+    # @goal_show = user.goals_users.goal.find(params[:total_completions])
+    # tgoal = GoalsUser.where({user_id:@user.id})
+    # @temp_goal = tgoal.goals.total_completions
+    # render plain: @temp_goal.inspect
+    # @total_completions = 0
+    # @user.goal_show.each do |goal|
+    #   @total_completions += goal.total_completions
+    # end
   end
 
 # CUSTOM GOAL ADD on GOALS UPDATE PAGE
