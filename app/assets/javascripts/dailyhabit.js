@@ -1,38 +1,63 @@
 $(document).ready(function(){
 
-  $('.table2').hide()
 
-  $('.goal-mind').on("click", function(e){
-    $('.table2').hide()
-    $('.table2').show('.goal-type-mind');
+var rows = $('#table2 tr');
+
+  rows.hide()
+
+  $('#goal-mind').on("click", function(e){
+    e.preventDefault();
+    rows.hide();
+    $('.goal-type-mind').show();
   })
 
-  $('.goal-body').on("click", function(e){
-    // alert("body")
-    $('.table2').hide()
-    $('.table2').show('.goal-type-body');
+  $('#goal-body').on("click", function(e){
+    e.preventDefault();
+    rows.hide();
+    $('.goal-type-body').show();
   })
 
-  $('.goal-social').on("click", function(e){
-    // alert("social")
-    $('.table2').hide()
-    $('.table2').show('.goal-type-social');
+  $('#goal-social').on("click", function(e){
+    e.preventDefault();
+    rows.hide();
+    $('.goal-type-social').show();
   })
 
-  $('.goal-personal-growth').on("click", function(e){
-    // alert("personal")
-    $('.table2').hide()
-    $('.table2').show('.goal-type-growth');
+  $('#goal-personal-growth').on("click", function(e){
+    e.preventDefault();
+    rows.hide();
+    $('.goal-type-personal-growth').show();
   })
 
-  $('.goal-world-takeover').on("click", function(e){
-    // alert("world")
-    $('.table2').hide()
-    $('.table2').show('.goal-type-world');
+  $('#goal-world-takeover').on("click", function(e){
+    e.preventDefault();
+    rows.hide();
+    $('.goal-type-world-takeover').show();
   })
+
+
+//   var rows = $('table.someclass tr');
+
+// $('#showBlackButton').click(function() {
+//     var black = rows.filter('.black').show();
+//     rows.not( black ).hide();
+// });
+
+// $('#showWhiteButton').click(function() {
+//     var white = rows.filter('.white').show();
+//     rows.not( white ).hide();
+// });
+
+// $('#showAll').click(function() {
+//     rows.show();
+// });
+
     // var goals = $(this);
     //   goals.show('.table2');
+
+// $('.ajax-done-btn').on("click", function(e){
 //     e.preventDefault();
+//     e.stopPropagation();
 //     var btn = $(this);
 //     $.ajax(btn.attr('href'),{
 //       type:'put',
@@ -70,8 +95,6 @@ $(document).ready(function(){
   //   e.preventDefault();
 
   // });
-
-$('.goal-type'+buttonText).show()
 
 }); // end document ready
 
