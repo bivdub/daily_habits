@@ -18,20 +18,23 @@ class ApplicationController < ActionController::Base
     @client = Twilio::REST::Client.new
 
     message = @client.account.messages.create(:body => "Welcome to The Daily Habit! Visit thedailyhabit to add goals so we can track your progress.",
-        :to => "+13045490748",     # Replace with your phone number
+        :to => "#{@user.phone}",     # Replace with your phone number
         :from => "+13049828749")   # Replace with your Twilio number
     puts message.sid
 
   end
 
 
-  # Need to determine how to call this with task/scheduler
-  def self.send_text
+# Need to determine how to call this with task/scheduler
+  def self.send_text(user)
+
+    @user = user
+
     @client = Twilio::REST::Client.new
 
     message = @client.account.messages.create(:body => "Did you meet your daily goals today? Visit thedailyhabit.herokuapp.com to update your status - or else!",
-        :to => "+13045490748",     # Replace with your phone number
-        :from => "+13049828749")   # Replace with your Twilio number
+      :to => "#{@user.phone}",     # Replace with your phone number
+      :from => "+13049828749")   # Replace with your Twilio number
     puts message.sid
 
   end
@@ -63,7 +66,7 @@ class ApplicationController < ActionController::Base
     end
 
     #3 X 3 - Keep at least 3 goals for 3 days
-    if @current_user.goals_users.select{|goal| goal.streak_completed >= 3}.length >= 3 && !@current_user.awards.find_by_id(5)
+    if @current_user.goals_users.select{|goal| goal.streak_completed >= 6}.length >= 3 && !@current_user.awards.find_by_id(5)
       a = Award.find_by_id(5)
       @current_user.awards << Award.find_by_id(5)
       a.total_completions += 1
@@ -80,12 +83,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def self.send_text_push
+  def self.send_text_push(user)
 
+    @user = user
     @client = Twilio::REST::Client.new
 
     message = @client.account.messages.create(:body => "Hey! Looks like you still have goals to complete! You can do it!",
-      :to => "+13045490748",    # Replace with your phone number
+      :to => "#{@user.phone}",    # Replace with your phone number
       :from => "+13049828749")   # Replace with your Twilio number
     puts message.sid
 
