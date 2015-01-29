@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
     end
 
     #INTRO TO YOUR BODY - Add a body goal
-    if @current_user.goals.where(goal_type: "body") && !@current_user.awards.find_by_id(3)
+    if @current_user.goals.where(goal_type: "body").any? && !@current_user.awards.find_by_id(3)
       a = Award.find_by_id(3)
       @current_user.awards << a
       a.total_completions += 1
@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
     end
 
     #QUICK STARTER - Avoid hitting Snooze for 3 days
-    if (@current_user.goals_users.where(goal_id: 23)[0].streak_completed >= 3) && !@current_user.awards.find_by_id(4)
+    if @current_user.goals_users.where(goal_id: 23).any? && @current_user.goals_users.where(goal_id: 23)[0].streak_completed >= 3 && !@current_user.awards.find_by_id(4)
       a = Award.find_by_id(4)
       @current_user.awards << Award.find_by_id(4)
       a.total_completions += 1
@@ -76,7 +76,9 @@ class ApplicationController < ActionController::Base
       @current_user.awards << Award.find_by_id(6)
       a.total_completions += 1
       a.save
+      alert("WOOT!")
     end
+
 
   end
 
