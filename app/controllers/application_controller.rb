@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     @client = Twilio::REST::Client.new
 
     message = @client.account.messages.create(:body => "Welcome to The Daily Habit! Visit thedailyhabit to add goals so we can track your progress.",
-        :to => "+13045490748",     # Replace with your phone number
+        :to => "#{@user.phone}",     # Replace with your phone number
         :from => "+13049828749")   # Replace with your Twilio number
     puts message.sid
 
@@ -26,11 +26,14 @@ class ApplicationController < ActionController::Base
 
 
 # Need to determine how to call this with task/scheduler
-  def self.send_text
+  def self.send_text(user)
+
+    @user = user
+
     @client = Twilio::REST::Client.new
 
     message = @client.account.messages.create(:body => "Did you meet your daily goals today? Visit thedailyhabit.herokuapp.com to update your status - or else!",
-      :to => "+13045490748",     # Replace with your phone number
+      :to => "#{@user.phone}",     # Replace with your phone number
       :from => "+13049828749")   # Replace with your Twilio number
     puts message.sid
 
@@ -79,16 +82,18 @@ class ApplicationController < ActionController::Base
       alert("WOOT!")
     end
 
-=======
-  def self.send_text_push
+  end
+
+  def self.send_text_push(user)
+
+    @user = user
 
     @client = Twilio::REST::Client.new
 
     message = @client.account.messages.create(:body => "Hey! Looks like you still have goals to complete! You can do it!",
-      :to => "+13045490748",    # Replace with your phone number
+      :to => "#{@user.phone}",    # Replace with your phone number
       :from => "+13049828749")   # Replace with your Twilio number
     puts message.sid
->>>>>>> c5b29fbcbde0b35c6e8f811891882fd8a0a4814b
 
   end
 

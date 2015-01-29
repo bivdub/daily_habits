@@ -1,5 +1,37 @@
-// $(document).ready(function(){
-//   $(".ajax-done-btn").on("click", function(e){
+$(document).ready(function(){
+
+  $('.table2').hide()
+
+  $('.goal-mind').on("click", function(e){
+    $('.table2').hide()
+    $('.table2').show('.goal-type-mind');
+  })
+
+  $('.goal-body').on("click", function(e){
+    // alert("body")
+    $('.table2').hide()
+    $('.table2').show('.goal-type-body');
+  })
+
+  $('.goal-social').on("click", function(e){
+    // alert("social")
+    $('.table2').hide()
+    $('.table2').show('.goal-type-social');
+  })
+
+  $('.goal-personal-growth').on("click", function(e){
+    // alert("personal")
+    $('.table2').hide()
+    $('.table2').show('.goal-type-growth');
+  })
+
+  $('.goal-world-takeover').on("click", function(e){
+    // alert("world")
+    $('.table2').hide()
+    $('.table2').show('.goal-type-world');
+  })
+    // var goals = $(this);
+    //   goals.show('.table2');
 //     e.preventDefault();
 //     var btn = $(this);
 //     $.ajax(btn.attr('href'),{
@@ -9,7 +41,6 @@
 //       btn.before("DONE!");
 //       btn.remove();
 //     });
-//   })
 
 //   $('.ajax-goal-add-remove').on("click", function(e){
 //     e.preventDefault();
@@ -39,6 +70,8 @@
   //   e.preventDefault();
 
   // });
+
+$('.goal-type'+buttonText).show()
 
 }); // end document ready
 
