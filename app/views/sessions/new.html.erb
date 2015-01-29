@@ -1,5 +1,5 @@
 <!-- login form include facebook auth login / bootstrap form for login, redirect to profile -->
-<div class="container">
+<div class="container text-center">
 <% if @current_user %>
     <h2>Hello again, <%= @current_user.name %></h2>
     <br><br>
@@ -9,7 +9,7 @@
 <% end %>
 <p>Already a member? Login:</p>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 col-md-offset-4">
       <%= bootstrap_form_for :user do |f| %>
         <%= f.text_field :email, placeholder: "Enter your email", icon: "envelope" %>
         <%= f.password_field :password, placeholder: "Enter your password", icon: "lock" %>
@@ -17,5 +17,5 @@
       <% end %>
     </div>
   </div>
-
+<br><br>
 </div>
