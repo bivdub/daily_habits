@@ -41,15 +41,27 @@ class UsersController < ApplicationController
 
 # USER SETTINGS UPDATE METHOD
   def update
-    @user.phone = params[:user][:phone]
-    @user.save
-    send_text_greeting
-
-    @user.email = params[:user][:email]
-    @user.save
-    UserMailer.email_notify(@user).deliver_now
+    if @user.phone = params[:user][:phone]
+      @user.save
+      send_text_greeting
+    else
+      @user.po_email = params[:user][:po_email]
+      @user.save
+      UserMailer.email_notify_po(@user).deliver_now
+    end
     # @goals.each do |goal_id|
     #   @user.goals << Goal.find(goal_id) unless goal_id.blank?
+
+
+    #notify po email if goals are active
+    # @user.po_email = params[:user][:po_email]
+    # @user.save
+    # @goal = Goal.find(params[:id])
+    # goal = GoalsUser.find_or_create_by({user_id:@user.id,goal_id:@goal.id})
+    # if goal.active == true
+    #   UserMailer.email_notify_po_inc(@user).deliver_now
+    # end
+
     redirect_to user_path(@user)
   end
 
