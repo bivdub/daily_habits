@@ -1,5 +1,40 @@
 <!-- shows users stats on goal from goalsusers db and global stats on the goal from goals db, to add: social sharing button -->
 
-<%= @goal.name %>
+<div class="container text-center">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>GOAL: <%= @goal.name %></h2>
 
-<p><%= link_to '&larr; <b> back </b>'.html_safe, user_path %> </p>
+          <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+              <div id="streakChart" style="height: 250px;"></div>
+            </div>
+          </div>
+
+    </div>
+  </div>
+</div>
+
+<%= @goal_total.inspect %>
+
+<%= @user_goal_total.inspect %>
+
+<script>
+  new Morris.Bar({
+  // ID of the element in which to draw the chart.
+  element: 'streakChart',
+    // Chart data records -- each entry in this array corresponds to a point on
+    // the chart.
+    data: [
+    { streak: 'Total Completions', value: <%=@total_completions%> },
+    ],
+    // The name of the data record attribute that contains x-values.
+    xkey: 'streak',
+    // A list of names of data record attributes that contain y-values.
+    ykeys: ['value'],
+    // Labels for the ykeys -- will be displayed when you hover over the
+    // chart.
+    labels: ['Value']
+  });
+
+</script>
