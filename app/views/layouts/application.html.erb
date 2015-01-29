@@ -46,7 +46,7 @@
         <ul class="nav navbar-nav navbar-right">
 
           <% if @current_user %>
-          <li><a href='/users/<%= @current_user.id %>'><h2>My Profile</h2></a><span class="sr-only">(current)</span></li>
+          <li><a href='/users/<%= @current_user.id %>'><h2><%= @current_user.name %>'s Profile</h2></a><span class="sr-only">(current)</span></li>
           <li><a href="/users/<%= @current_user.id %>/goals"><h2>Update Goals</h2><span class="sr-only"></span></a></li>
           <li><a href="/logout"><h2>Logout</h2><span class="sr-only"></span></a></li>
           <% else %>
