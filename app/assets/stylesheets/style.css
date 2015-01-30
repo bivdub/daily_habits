@@ -48,18 +48,22 @@ h5 {
   font-size: 8px;
 }
 
-
 .btn-primary:hover {
-  background-color: #999888;
+  background-color: #34DDDD;
   border-style: none;
 }
 
+/*.btn-primary:active {
+  background-color: #4bbc9c;
+  border-style: none;
+}*/
+
 .btn-primary:focus {
-  background-color: #03A678;
+  background-color: #5cb85c;
 }
 
 .btn-primary {
-  background-color: #999999;
+  background-color: #0b62a4;
   border-style: none;
 }
 
