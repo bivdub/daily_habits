@@ -1,7 +1,7 @@
 <p>Hi <%= @user.po_email %>,</p>
 
-<p><%= @user.name %> has selected you to be their accountability partner.</p>
+<p><%= @user.name %> has selected you to be their accountability partner through <a href="https://thedailyhabit.herokuapp.com">The Daily Habit</a>. They want you to help them stay on track with some new daily goals!</p>
 
-<p>Check out their <%= link_to "goals", user_url(@user) %>. </p>
+<p>If <% @user.name %> doesn't finish their daily goals by the end of the day, you'll be notified. By including you in their daily habit progress, you have permission to pester them about the goals they didn't complete as much as you like!</p>
 
-<p>If <% @user.name %> doesn't finish their daily goals by the end of the day, you'll be notified. And you've been given the go to pester them about the goals they didn't complete as much as you like!</p>
+<p>Have fun!<br>The Team at The Daily Habit</p>

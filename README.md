@@ -1,152 +1,84 @@
 # daily_habits
 
-Hello, this is a test
+The Daily Habit is an application that aims to help users create, set and keep goals. Users of The Daily Habit lean on our app to provide real-time statistics, updates and daily notifications to help them stay on track with a new goal!
 
-Sanda's test code for Charts:
+http://thedailyhabit.herokuapp.com
 
-<body>
-    <div class="container">
-    <%= render "layouts/flash" %>
-      <h1>TESTING PULL REQUESTS!!!!! THANKS FOR BEING OUT GIT MASTER BRIAN!</h1>
+----------------------------------------
+Contributors:
 
-      <div id="myfirstchart" style="height: 250px;"></div>
+Annie McGhee: https://github.com/anniemcghee
+Brian Van Winkle: https://github.com/bivdub
+Sanda Htyte: https://github.com/bksanda
 
-<script>
+----------------------------------------
+User Story:
 
-new Morris.Line({
-  // ID of the element in which to draw the chart.
-  element: 'myfirstchart',
+When a user wants to implement a new daily habit, they sign up for The Daily Habit using our authorization system or by signing up with Facebook.
 
-  // Chart data records -- each entry in this array corresponds to a point on
-  // the chart.
-  data: [
-    { year: '2008', value: 20 },
-    { year: '2009', value: 10 },
-    { year: '2010', value: 5 },
-    { year: '2011', value: 5 },
-    { year: '2012', value: 20 }
-  ],
+Upon sign up, the user will be directed to their profile and prompted to add new goals.
 
-  // The name of the data record attribute that contains x-values.
-  xkey: 'year',
+A user can select from genre lists of goals created by The Daily Habit - or they can create a custom goal. Users can set as few or as many goals as they like - but every goal's progress will be tracked by The Daily Habit!
 
-  // A list of names of data record attributes that contain y-values.
-  ykeys: ['value'],
+In order to assist with remembering to complete their goals, any user can opt-in to text notifications. The Daily Habit will notify you every day if you have yet to complete goals.
 
-  // Labels for the ykeys -- will be displayed when you hover over the
-  // chart.
+Users can also add an "accountability email" - someone that is emailed when they don't achieve some of their goals!
 
-  labels: ['Value']
-});
+Every day, the user is responsible for checking the goal off their to-do list - "Done!". The Daily Habit works behind the scenes to track users' success rates, streaks of days completed and many more statistics about individual users and our community of users.
 
-</script>
+As a user progresses with their goals, The Daily Habit has a badge award system that awards users for a multitude of achievements. Motivating factors like badges, texts, accountability emails and statistics are a recipe for user success.
 
-        <%= yield %>
+----------------------------------------
+Wireframes:
 
-    </div>
-  </body>
-</html>
+Our original wireframes were created in UXPin-
+http://live.uxpin.com/27102740dd6e4339136294305026cdd155434317#/pages/15452203
 
+-----------------------------------------
+Models:
 
+User - used for authorization
+GoalsUser - Links many users to many goals and includes statistics related to goals and users
+Goals - Lists all goals, their type (including "User" for custom goals) and includes statistics for the community of users of each goal
+Awards - Lists all awards and includes badge images and ids
 
+-----------------------------------------
+APIs, Addons and Gems Used:
 
-  <%= link to "Edit", , edit_user_path(@user) %>
+Twilio
+Sendgrid
+Morris Charts
+Rafael.js
+Heroku Scheduler
+BCrypt
+Facebook OmniAuth
 
-  <% @goals_user.each do |goal| %>
-    <tr>
-      <td><%= link_to goal.name, users_goalshow_path(goal.name) %></td>
-      <td><%= link_to "<button type='button' class='btn btn-primary'>Delete</button>".html_safe, goal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
+-------------------------------------------
+Scope/MVP:
 
-<!-- List out the goals, collection boxes, maybe change to radio buttons later-->
-<%= link to "Update Goals", user_id_goals_path(@user) %>
+We were successful in meeting our deliverables on time to achieve MVP for The Daily Habit.
 
-<!-- debugging on application page -->
-<%= debug params %>
-<%= debug @user %>
+-Create a functional app that tracks and resets unique user statistics daily.
+-Use Active Record to traverse large amoutns of data and options for users.
+-Enable OmniAuth and opt-in for text or email notifications from our app.
+-Create an award system that responds to user interaction with the app.
+-Compare user statistics to community statistics for each goal.
 
-<<<<<<< HEAD
+-------------------------------------------
+Wishlist:
 
-GRAVEYARD OF GOALS UPDATE AJAX FOR REFERENCE:
+-Make the awards system more robust. At this point, it's more as a "Proof of Concept" stage and has lots of room to evolve.
 
+-Have a larger dataset to work with regarding statistics. Because this app resets on a daily basis, we did not have much user/community data to present and use. A larger dataset would help inform what data would be interesting and more dynamic for our users.
 
+-Rework the model system to be more concise and take all stat-tracking out of GoalsUsers.
 
+-Add a password reset function to our user update.
 
+-Customize emails and texts for each user based on goals.
 
+-Include more dynamic animation and styling.
 
+-Utilize more mobile responsive tools like modals, etc.
 
-
-
-
-  <div class="row text-center">
-    <%= bootstrap_form_for :addgoal, html:{class: 'ajax-goal-form'} do |f| %>
-    <%= f.text_field :name, placeholder: "Add a new custom goal" %>
-    <%= button_tag(type: 'submit', class: "btn btn-success") do %>
-      <i class="glyphicon glyphicon-ok"></i>
-    <% end %>
-    <% end %>
-  </div>
-  <div class="col-xs-6 col-xs-offset-3">
-    <table class="table table-striped">
-      <caption class="text-center">Your Custom Goals</caption>
-      <thead>
-        <tr>
-          <th>Goal</th>
-          <th>Remove</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @users_custom_goals.each do |goal| %>
-        <tr>
-           <% is_active = goal.goals_users.where({user_id:@user.id,active:true}).any? %>
-          <td><%= goal.name %></td>
-          <td>
-            <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, goal_inactive_path(:id => goal.id), :class => "btn btn-danger ajax-goal-custom-remove", :style => (is_active ? "" : "display: none") %>
-
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-
-  </div>
-  <br><br>
-
-  <div class="col-xs-6 col-xs-offset-3">
-    <table class="table table-striped">
-      <caption class="text-center"></caption>
-      <thead>
-        <tr>
-          <th>Goal</th>
-          <th>Type</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @goals.each do |goal| %>
-        <tr class="goal-row goal-type-<%= goal.goal_type.gsub(/\s+/, '-') %>">
-          <td><%= goal.name.capitalize %></td>
-          <td><%= goal.goal_type.capitalize %></td>
-          <td>
-          <% is_active = goal.goals_users.where({user_id:@user.id,active:true}).any? %>
-            <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, goal_inactive_path(:id => goal.id), :class => "btn btn-danger ajax-goal-add-remove", :style => (is_active ? "" : "display: none") %>
-            <%= link_to '<span class="glyphicon glyphicon-ok"></span>'.html_safe, goal_update_path(:id => goal.id), :class => "btn btn-success ajax-goal-add-remove", :style => (is_active ? "display: none" : "")  %>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-  <br><br>
-
-
-</div>
-
-<!--
-1) ajax delete (make goals inactive) button (within table row)
-2) form for custom create and make that ajax so it appears in the list of goals
-3) goals add drop down with hardcoded goals (ability to select dropdown and add them to goals list)
-5) counting the goals as you select prepopulated goals
--->
 

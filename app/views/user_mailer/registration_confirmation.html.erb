@@ -1,5 +1,7 @@
-<p><%= @user.name %></p>
+<p>Hey there <%= @user.name %>:</p>
 
-<p>Thank you for registering!</p>
+<p>Welcome to <a href="https://thedailyhabit.herokuapp.com">The Daily Habit</a>!</p>
 
-<p><%= link_to "Edit Profile", edit_user_url(@user) %></p>
+<p>Get started on your <%= link_to "profile", edit_user_url(@user) %> and goal setting.</p>
+
+<p>Good luck!<br>The Team at The Daily Habit</p>
