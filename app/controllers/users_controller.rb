@@ -16,12 +16,17 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
+    @goal = Goal.find_by_id(params[:goal_id])
     @goals_users = @user.goals_users.where({active:true})
-    @streak_completed, @max_streak = 0, 0
+    # @streak_completed,@max_streak
+    @avg_streak, @avg_maxstreak = 0, 0
     @user.goals_users.each do |goal|
-      @streak_completed += goal.streak_completed
-      @max_streak += goal.max_streak
+      @avg_streak = (@goals_users.average(:streak_completed).to_f.round(2))/2
+      @avg_maxstreak = (@goals_users.average(:max_streak).to_f.round(2))/2
     end
+
+    # @streak_completed = (@streak_completed + goal.streak_completed)/2
+    # @max_streak = (@max_streak + goal.max_streak)/2
 
     ##### ASK ABOUT
     # @user.awards.each do |award|

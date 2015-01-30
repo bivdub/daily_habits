@@ -10,12 +10,8 @@
 
       <%= link_to "Edit Your Contact Settings", edit_user_path(@user) %>
 
-      <!-- AJAX Put in some check off goals completed -->
+ <h2>You have <%=@user.goals_users.where({completed_today:true}).length%> out of <%=@user.goals.length%> goals completed today!</h2>
 
-
-      <!-- include partials?? -->
-
-      <!-- include badges, progress bar and chart stats -->
       <br>
     </div>
   </div>
@@ -60,11 +56,12 @@
       <% end %>
     </div>
 
-    <br><br>
+    <br>
 
   </div>
   <div class="row">
     <div class="col-xs-8 col-xs-offset-2">
+    <h2> Days Completed Streak </h2>
       <div id="streakChart" style="height: 250px;"></div>
     </div>
   </div>
@@ -77,9 +74,8 @@
       // Chart data records -- each entry in this array corresponds to a point on
       // the chart.
       data: [
-      { streak: 'Streak Completed', value: <%=@streak_completed %> },
-      { streak: 'Max Streak', value: <%=@max_streak%> },
-
+      { streak: 'Average Streak', value: <%=@avg_streak%> },
+      { streak: 'Longest Streak', value: <%=@avg_maxstreak%> },
       ],
       // The name of the data record attribute that contains x-values.
       xkey: 'streak',
@@ -87,7 +83,7 @@
       ykeys: ['value'],
       // Labels for the ykeys -- will be displayed when you hover over the
       // chart.
-      labels: ['Value']
+      labels: ['Days']
     });
 
 </script>
