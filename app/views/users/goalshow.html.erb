@@ -1,5 +1,55 @@
 <!-- shows users stats on goal from goalsusers db and global stats on the goal from goals db, to add: social sharing button -->
 
-<%= @goal.name %>
 
-<p><%= link_to '&larr; <b> back </b>'.html_safe, user_path %> </p>
+<div class="container text-center">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>GOAL: <%= @goal.name %></h1>
+        <div class="row">
+        <div class="col-xs-6 col-md-6">
+            <h2>Streak Statistics</h2>
+            <div id="userStreakChart" style="height: 250px, width:400px;"></div>
+            </div>
+              <div class="col-xs-6 col-md-6">
+            <h2>Community Goal Use</h2>
+            <div id="communityChart" style="height: 250px, width:400px;"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+<script>
+  new Morris.Donut({
+  // ID of the element in which to draw the chart.
+  element: 'userStreakChart',
+    // Chart data records -- each entry in this array corresponds to a point on
+    // the chart.
+    data: [
+    { label: '<%=@user.name%>', value: <%=@streak_completed%> },
+    { label: 'All Users', value: <%=@average_streak_currently%> },
+    ],
+  });
+
+</script>
+
+
+<script>
+  new Morris.Donut({
+  // ID of the element in which to draw the chart.
+  element: 'communityChart',
+    // Chart data records -- each entry in this array corresponds to a point on
+    // the chart.
+    data: [
+    { label: 'Total Users Ever', value: <%=@users_ever%> },
+    { label: 'Current Users', value: <%=@users_currently%> },
+    { label: 'Total Completions', value: <%=@total_completions%> },
+    ],
+  });
+
+</script>
+
