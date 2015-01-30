@@ -11,8 +11,7 @@ $(document).ready(function(){
     });
   })
 
-var rows = $('#table2 tr');
-
+var rows = $('.table2 tr');
   rows.hide()
 
   $('#goal-mind').on("click", function(e){

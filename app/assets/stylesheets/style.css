@@ -1,6 +1,6 @@
 
 body {
-  background-color: #fff;
+  background-color: #E6E6E6;
 }
 
 .container2 {
@@ -8,8 +8,7 @@ body {
   text-align: center;
 }
 
-h1,
-h2,
+
 h3,
 h4,
 h5,
@@ -20,17 +19,21 @@ h6 {
 }
 
 h1{
+  font-family: 'Stint Ultra Condensed', cursive;
   font-size: 60px;
   font-style: bold;
 }
 
 h2{
   font-size: 20px;
+  font-weight: 600;
+  font-family: 'Pontano Sans', sans-serif;
+  color:#E6E6E6;
 }
 
 h3{
   font-size: 16px;
-  color: #787878;
+  color: #14141F;
   font-weight: 400;
   line-height: 24px;
 }
@@ -47,16 +50,22 @@ h5 {
 
 
 .btn-primary:hover {
-  background-color: black;
+  background-color: #999888;
   border-style: none;
+}
+
+.btn-primary:focus {
+  background-color: #03A678;
 }
 
 .btn-primary {
-  background-color: #620032;
+  background-color: #999999;
   border-style: none;
 }
 
-
+.flash {
+  /*css_formatting_here*/
+}
 
 /*.navbar-default .navbar-nav>li>a {
   color: #232425;
@@ -443,9 +452,17 @@ ul.social_icons li  a i{
 
 td {
   vertical-align: middle;
+  /*border-style: 1px solid black;*/
 }
 
+/*table {
+  background: #A3DADA;
+}*/
 /*div {
   border: 1px solid pink;
 }
 */
+
+td {
+  vertical-align: middle !important;
+}

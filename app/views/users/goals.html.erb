@@ -83,12 +83,12 @@
         <button type="button" id="goal-social" class="btn btn-md btn-primary">Social</button><br><br>
         <button type="button" id="goal-personal-growth" class="btn btn-md btn-primary">Personal Growth</button>
         <button type="button" id="goal-world-takeover" class="btn btn-md btn-primary">World Takeover</button></h3>
-        <h3><table id="table2" class="table table-striped">
+        <h3><table class="table table2">
           <caption class="text-center"></caption>
           <tbody>
             <% @goals.each do |goal| %>
             <% is_inactive = goal.goals_users.where({user_id:@user.id,active:false}).any? %>
-            <tr class="goal-type-<%= goal.goal_type.gsub(/\s+/, '-') %>" style="display: table-row">
+            <tr class="goal-type-<%= goal.goal_type.gsub(/\s+/, '-') %>" >
               <td><%= goal.name.capitalize %></td>
               <td>
                 <%= link_to '<span class="glyphicon glyphicon-ok"></span>'.html_safe, goal_update_path(:id => goal.id), :method => :put, :class => "btn btn-success ajax-goal-add-remove"  %>
