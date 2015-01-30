@@ -2,7 +2,7 @@
 
 <p><%= @user.name %> did not complete the daily goals.</p>
 
-<p>Check out their <%= link_to "goals", user_url(@user) %> to see which ones they didn't complete. Then pester away!!!</p>
+<p>Check out their <%= link_to "goals", user_url(@user, :host => 'https://thedailyhabit.herokuapp.com') %> to see which ones they didn't complete. Then pester away!!!</p>
 
 
 
