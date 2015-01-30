@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  # before_action :is_authenticated?
+  before_action :is_authenticated?, :except => :new
   before_action do
     @user = current_user
   end
@@ -61,12 +61,14 @@ class UsersController < ApplicationController
       @user.phone = params[:user][:phone]
       @user.po_email = params[:user][:po_email]
       @user.save
+      flash[:success] = "Info changed successfully!"
       send_text_greeting
     end
     if @user.po_email != params[:user][:po_email]
       @user.phone = params[:user][:phone]
       @user.po_email = params[:user][:po_email]
       @user.save
+      flash[:success] = "Info changed successfully!"
       UserMailer.email_notify_po(@user).deliver_now
     end
     # @goals.each do |goal_id|

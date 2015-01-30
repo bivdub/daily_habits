@@ -40,25 +40,21 @@
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-left">
-          <li><h2><a href='javascript:window.location = document.referrer;'><span class="glyphicon glyphicon-chevron-left"></span></a></h2></li>
-        </ul>
         <ul class="nav navbar-nav navbar-right">
-
           <% if @current_user %>
-          <li><a href='/users/<%= @current_user.id %>'><h2><%= @current_user.name %>'s Profile</h2></a><span class="sr-only">(current)</span></li>
-          <li><a href="/users/<%= @current_user.id %>/goals"><h2>Update Goals</h2><span class="sr-only"></span></a></li>
-          <li><a href="/logout"><h2>Logout</h2><span class="sr-only"></span></a></li>
+          <li class="bar-text"><a href='/users/<%= @current_user.id %>'><h7><%= @current_user.name %>'s Profile</h7></a><span class="sr-only">(current)</span></li>
+          <li ><a href="/users/<%= @current_user.id %>/goals"><h7>Update Goals</72><span class="sr-only"></span></a></li>
+          <li><a href="/logout"><h7>Logout</h7><span class="sr-only"></span></a></li>
           <% else %>
-          <li><a href="/login"><h2>Login</h2><span class="sr-only">(current)</span></a></li>
-          <li><a href="/signup"><h2>Signup</h2><span class="sr-only">(current)</span></a></li>
+          <li><a href="/login"><h7>Login</h7><span class="sr-only">(current)</span></a></li>
+          <li><a href="/signup"><h7>Signup</h7><span class="sr-only">(current)</span></a></li>
           <% end %>
         </ul>
       </div>
     </div>
   </nav>
+  <%= render "partials/flash" %>
   <div class="container">
-    <%= render "partials/flash" %>
 
     <%= yield %>
   </div>

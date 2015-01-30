@@ -8,6 +8,16 @@ body {
   text-align: center;
 }
 
+h7{
+  font-size: 20px;
+  font-weight: 600;
+  font-family: 'Pontano Sans', sans-serif;
+  color:lightgrey;
+}
+
+h7:hover{
+  color: #EC9A0A;
+}
 
 h3,
 h4,
@@ -28,7 +38,7 @@ h2{
   font-size: 20px;
   font-weight: 600;
   font-family: 'Pontano Sans', sans-serif;
-  color:#E6E6E6;
+  color:#4e4e4e;
 }
 
 h3{
