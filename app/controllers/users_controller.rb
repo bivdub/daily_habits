@@ -121,7 +121,7 @@ class UsersController < ApplicationController
     @total_completions = @goal.total_completions
 
     #For user to compare with
-    @average_streak_currently = @goal.average_streak_currently
+    @average_streak_currently = (@goal.average_streak_currently.to_i)/2
 
   end
 

@@ -10,7 +10,7 @@
 
       <%= link_to "Edit Your Contact Settings", edit_user_path(@user) %>
 
- <h2>You have <%=@user.goals_users.where({completed_today:true}).length%> out of <%=@user.goals.length%> goals completed today!</h2>
+ <h2>You have <%=@user.goals_users.where({completed_today:true}).where({active:true}).length%> out of <%=@user.goals_users.where(active:true).length%> goals completed today!</h2>
 
       <br>
     </div>
