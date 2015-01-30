@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   def show
     @user = current_user
     @goals_users = @user.goals_users.where({active:true})
-    @streak_completed, @max_streak, @total_completions = 0, 0, 0
+    @streak_completed, @max_streak = 0, 0
     @user.goals_users.each do |goal|
       @streak_completed += goal.streak_completed
       @max_streak += goal.max_streak
@@ -99,8 +99,25 @@ class UsersController < ApplicationController
 
 # INDIVIDUAL GOAL PAGE
   def goalshow
+    @user = current_user
     @goal = Goal.find_by_id(params[:goal_id])
     # @goal = GoalsUser
+
+    #For user currently
+    @goals_users = @user.goals_users.where({active:true})
+    @streak_completed = 0
+    @user.goals_users.each do |goal|
+      @streak_completed = (@streak_completed + goal.streak_completed)/2
+    end
+
+    #For all community
+    @users_ever = @goal.users_ever
+    @users_currently = @goal.users_currently
+    @total_completions = @goal.total_completions
+
+    #For user to compare with
+    @average_streak_currently = @goal.average_streak_currently
+
   end
 
 # CUSTOM GOAL ADD on GOALS UPDATE PAGE
