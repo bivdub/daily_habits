@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :is_authenticated?, :except => :new
+  before_action :is_authenticated?, :except => [:new, :create]
   before_action do
     @user = current_user
   end
