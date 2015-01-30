@@ -8,7 +8,7 @@
     <div class="col-xs-8 col-xs-offset-2">
       <h1><%= @user.name %></h1>
 
-      <%= link_to "Edit Your Contact Settings", edit_user_path(@user) %>
+      <h2><%= link_to "Edit Your Contact Settings", edit_user_path(@user) %></h2>
 
       <!-- AJAX Put in some check off goals completed -->
 
@@ -20,7 +20,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-2">
+    <div class="col-xs-2 col-md-2 opacity">
       <h2>Badges</h2>
       <% if @user.awards.any? %>
         <% @user.awards.each do |award|%>
@@ -30,7 +30,7 @@
       <% end %>
     </div>
     <% if @goals_users.any? %>
-    <div class="col-xs-8">
+    <div class="col-xs-10 col-md-10">
       <table class="table table-striped">
         <h2 class="text-center">Your Daily Goals</h2>
         <thead>
@@ -56,19 +56,16 @@
         </tbody>
       </table>
       <% else %>
-      <h1><a href="/users/<%=@user.id%>/goals">CLICK HERE TO ADD GOALS!</a></h1>
+      <h2><%= link_to "Add goals now!", goals_path(@user) %></h2>
+      <!-- <h2><a href="/users/<%=@user.id%>/goals">Add goals!</a></h2> -->
       <% end %>
-    </div>
 
-    <br><br>
-
-  </div>
-  <div class="row">
-    <div class="col-xs-8 col-xs-offset-2">
       <div id="streakChart" style="height: 250px;"></div>
+
     </div>
+    <br><br>
   </div>
-</div>
+
 
 <script>
   new Morris.Bar({
