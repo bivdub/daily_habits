@@ -1,5 +1,7 @@
-<p><%= @user.name %></p>
+<p>Hey there <%= @user.name %>,</p>
 
-<p>Your notifications have been set!</p>
+<p>Your email notifications have been set!</p>
 
-<p><%= link_to "Edit Profile", edit_user_url(@user) %></p>
+<p>Head back to <%= link_to "The Daily Habit", edit_user_url(@user) %> to stay on track!</p>
+
+<p>Good luck,<br>The Team at The Daily Habit</p>

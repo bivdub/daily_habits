@@ -1,8 +1,10 @@
-<p>Hi <%= @user.po_email %>,</p>
+<p>We've got some bad news for you, <%= @user.po_email %>.</p>
 
-<p><%= @user.name %> did not complete the daily goals.</p>
+<p>Your friend <%= @user.name %> did not complete their daily goals.</p>
 
-<p>Check out their <%= link_to "goals", user_url(@user) %> to see which ones they didn't complete. Then pester away!!!</p>
+<p>Get in touch ASAP to help them stay on track!</p>
+
+<p>Good luck,<br>The Team at The Daily Habit</p>
 
 
 
