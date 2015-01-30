@@ -45,7 +45,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       flash[:success] = "Sign Up Successful!"
       UserMailer.registration_confirmation(@user).deliver_now
-      redirect_to user_path(@user)
+      redirect_to login_path
     end
   end
 
