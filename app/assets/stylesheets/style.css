@@ -3,6 +3,11 @@ body {
   background-color: #fff;
 }
 
+.container2 {
+  width: 100%;
+  text-align: center;
+}
+
 h1,
 h2,
 h3,
@@ -282,7 +287,7 @@ ul.social_icons li  a i{
 }
 
 
-.team .social_icons .fa-facebook:hover,
+.team .social_icons .fa-github:hover,
 .team .social_icons .fa-twitter:hover,
 .team .social_icons .fa-linkedin:hover {
   transform: rotate(360deg);
@@ -298,7 +303,7 @@ ul.social_icons li  a i{
   -o-transition: all 0.9s ease 0s;
 }
 
-.team .social_icons .fa-facebook {
+.team .social_icons .fa-github {
   background: #0182c4;
 }
 
@@ -439,3 +444,8 @@ ul.social_icons li  a i{
 td {
   vertical-align: middle;
 }
+
+/*div {
+  border: 1px solid pink;
+}
+*/
