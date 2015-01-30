@@ -30,6 +30,7 @@ h6 {
 
 h1{
   font-family: 'Stint Ultra Condensed', cursive;
+  /*font-family: 'Knewave', cursive;*/
   font-size: 60px;
   font-style: bold;
 }
@@ -38,7 +39,7 @@ h2{
   font-size: 20px;
   font-weight: 600;
   font-family: 'Pontano Sans', sans-serif;
-  color:#4e4e4e;
+  color:#4e4e4e
 }
 
 h3{
