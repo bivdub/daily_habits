@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
 
     @client = Twilio::REST::Client.new
 
-    message = @client.account.messages.create(:body => "Welcome to The Daily Habit! Visit www.thedailyhabit.herokuapp.com to add goals so we can track your progress.",
+    message = @client.account.messages.create(:body => "Welcome to The Daily Habit! Visit https://thedailyhabit.herokuapp.com to add goals so we can track your progress.",
         :to => "#{@user.phone}",     # Replace with your phone number
         :from => "+13049828749")   # Replace with your Twilio number
     puts message.sid
@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
 
     @client = Twilio::REST::Client.new
 
-    message = @client.account.messages.create(:body => "Did you meet your daily goals today? Visit www.thedailyhabit.herokuapp.com to update your status - or else!",
+    message = @client.account.messages.create(:body => "Did you meet your daily goals today? Visit https://thedailyhabit.herokuapp.com to update your status - or else!",
       :to => "#{@user.phone}",     # Replace with your phone number
       :from => "+13049828749")   # Replace with your Twilio number
     puts message.sid
@@ -88,7 +88,7 @@ class ApplicationController < ActionController::Base
     @user = user
     @client = Twilio::REST::Client.new
 
-    message = @client.account.messages.create(:body => "Hey! Looks like you still have goals to complete! Visit www.thedailyhabit.herokuapp.com to stay on track.",
+    message = @client.account.messages.create(:body => "Hey! Looks like you still have goals to complete! Visit https://thedailyhabit.herokuapp.com to stay on track.",
       :to => "#{@user.phone}",    # Replace with your phone number
       :from => "+13049828749")   # Replace with your Twilio number
     puts message.sid
