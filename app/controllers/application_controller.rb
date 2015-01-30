@@ -58,9 +58,9 @@ class ApplicationController < ActionController::Base
     end
 
     #QUICK STARTER - Avoid hitting Snooze for 3 days
-    if @current_user.goals_users.where(goal_id: 23).any? && @current_user.goals_users.where(goal_id: 23)[0].streak_completed >= 3 && !@current_user.awards.find_by_id(4)
+    if @current_user.goals.where(name: "avoid hitting snooze").first.goals_users.any? && @current_user.goals.where(name: "avoid hitting snooze").first.goals_users[0].streak_completed >= 6 && !@current_user.awards.find_by_id(4)
       a = Award.find_by_id(4)
-      @current_user.awards << Award.find_by_id(4)
+      @current_user.awards << a
       a.total_completions += 1
       a.save
     end
@@ -68,7 +68,7 @@ class ApplicationController < ActionController::Base
     #3 X 3 - Keep at least 3 goals for 3 days
     if @current_user.goals_users.select{|goal| goal.streak_completed >= 6}.length >= 3 && !@current_user.awards.find_by_id(5)
       a = Award.find_by_id(5)
-      @current_user.awards << Award.find_by_id(5)
+      @current_user.awards << a
       a.total_completions += 1
       a.save
     end
@@ -76,7 +76,7 @@ class ApplicationController < ActionController::Base
     #10 SPOT - put at least 10 active goals on your list
     if (@current_user.goals_users.where(active: true).length >= 10) && !@current_user.awards.find_by_id(6)
       a = Award.find_by_id(6)
-      @current_user.awards << Award.find_by_id(6)
+      @current_user.awards << a
       a.total_completions += 1
       a.save
       alert("WOOT!")

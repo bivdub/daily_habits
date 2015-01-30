@@ -35,7 +35,7 @@ class UsersController < ApplicationController
 
     if @user.errors.any?
       flash[:danger] = 'Invalid Entry'
-      redirect_to signup_path
+      render :new
     else
       session[:user_id] = @user.id
       flash[:success] = "Sign Up Successful!"
@@ -123,7 +123,7 @@ class UsersController < ApplicationController
       goal.save
     end
     # goals_user.save_all
-    # update_awards
+    update_awards
     respond_to do |f|
       f.html {redirect_to goals_path(@user)}
       f.json {render json: {success: true}}
