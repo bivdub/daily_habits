@@ -45,14 +45,4 @@ class GoalsUser < ActiveRecord::Base
 
   end
 
-  # def gu_update
-  #   if self.completed_today
-  #     self.streak_completed += 1
-  #     self.streak_failed = 0
-  #     if self.streak_completed > self.max_streak
-  #       self.max_streak = self.streak_completed
-  #     end
-  #   end
-  # end
-
 end

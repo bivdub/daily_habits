@@ -1,4 +1,3 @@
-
 body {
   background-color: #E6E6E6;
 }
@@ -64,11 +63,6 @@ h5 {
   border-style: none;
 }
 
-/*.btn-primary:active {
-  background-color: #4bbc9c;
-  border-style: none;
-}*/
-
 .btn-primary:focus {
   background-color: #5cb85c;
 }
@@ -81,10 +75,6 @@ h5 {
 .flash {
   /*css_formatting_here*/
 }
-
-/*.navbar-default .navbar-nav>li>a {
-  color: #232425;
-}*/
 
 a {
   color: #96281B;
@@ -467,16 +457,7 @@ ul.social_icons li  a i{
 
 td {
   vertical-align: middle;
-  /*border-style: 1px solid black;*/
 }
-
-/*table {
-  background: #A3DADA;
-}*/
-/*div {
-  border: 1px solid pink;
-}
-*/
 
 td {
   vertical-align: middle !important;

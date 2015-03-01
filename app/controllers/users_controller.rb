@@ -18,20 +18,11 @@ class UsersController < ApplicationController
     @user = current_user
     @goal = Goal.find_by_id(params[:goal_id])
     @goals_users = @user.goals_users.where({active:true})
-    # @streak_completed,@max_streak
     @avg_streak, @avg_maxstreak = 0, 0
     @user.goals_users.each do |goal|
       @avg_streak = (@goals_users.average(:streak_completed).to_f.round(2))/2
       @avg_maxstreak = (@goals_users.average(:max_streak).to_f.round(2))/2
     end
-
-    # @streak_completed = (@streak_completed + goal.streak_completed)/2
-    # @max_streak = (@max_streak + goal.max_streak)/2
-
-    ##### ASK ABOUT
-    # @user.awards.each do |award|
-    #   @total_completions += award.total_completions
-    # end
 
   end
 
@@ -71,28 +62,9 @@ class UsersController < ApplicationController
       flash[:success] = "Info changed successfully!"
       UserMailer.email_notify_po(@user).deliver_now
     end
-    # @goals.each do |goal_id|
-    #   @user.goals << Goal.find(goal_id) unless goal_id.blank?
-
-
-    #notify po email if goals are active
-    # @user.po_email = params[:user][:po_email]
-    # @user.save
-    # @goal = Goal.find(params[:id])
-    # goal = GoalsUser.find_or_create_by({user_id:@user.id,goal_id:@goal.id})
-    # if goal.active == true
-    #   UserMailer.email_notify_po_inc(@user).deliver_now
-    # end
 
     redirect_to edit_user_path(@user)
   end
-
-  # def destroy
-  #   @goal = Goal.find(params[:id])
-  #   @goal.destroy
-
-  #   redirect_to user_path
-  # end
 
   def goals
     @goal = Goal.new
@@ -156,7 +128,6 @@ class UsersController < ApplicationController
   end
 
   # HARDCODE GOAL ADD on GOAL UPDATE PAGE
-
   def goals_update
     @goal = Goal.find(params[:id])
     goal = GoalsUser.find_or_create_by({user_id:@user.id,goal_id:@goal.id})
@@ -184,7 +155,6 @@ class UsersController < ApplicationController
   def awards
   end
 
-
   private
 
   def user_params
@@ -193,7 +163,6 @@ class UsersController < ApplicationController
 
   def goal_params
     params.require(:addgoal).permit(:name)
-        # params_require[:goal].permit(:streak_completed, :streak_failed, :completed_today, :max_streak, :max_failed, :active)
   end
 
 end
